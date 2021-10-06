@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let video of videos" trackBy="video.id">
+    <a [routerLink]="['/videos', video.id]">{{ video.title }}</a>
+  </li>
+</ul>
