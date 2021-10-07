@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Videos } from 'src/app/interfaces/videos.interface';
+import { VideoService } from 'src/app/services/video.service';
 
 @Component({
   selector: 'app-videos',
@@ -7,28 +7,17 @@ import { Videos } from 'src/app/interfaces/videos.interface';
   styleUrls: ['./videos.component.scss'],
 })
 export class VideosComponent implements OnInit {
-  videos: Array<Videos> = [];
+  videos: Array<any> = [];
 
-  constructor() {}
+  constructor(private videoService: VideoService) {}
 
   ngOnInit(): void {
     this.getVideos();
   }
 
   private getVideos = () => {
-    this.videos = [
-      {
-        id: Math.random(),
-        title: 'Hello World! Video 1',
-      },
-      {
-        id: Math.random(),
-        title: 'Video 2',
-      },
-      {
-        id: Math.random(),
-        title: 'Video 3',
-      },
-    ];
+    this.videoService.getVideos().subscribe((response: any) => {
+      this.videos = response.data;
+    });
   };
 }

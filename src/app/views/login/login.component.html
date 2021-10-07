@@ -1,0 +1,23 @@
+<div class="container">
+  <form #formLogin="ngForm" (submit)="login(formLogin.value)" novalidate>
+    <div>
+      <label>Email</label>
+      <input type="email" email ngModel name="email" required />
+    </div>
+
+    <div>
+      <label>Password</label>
+      <input type="password" ngModel name="password" required />
+    </div>
+
+    <div>
+      <button
+        [disabled]="!formLogin.valid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Login
+      </button>
+    </div>
+  </form>
+</div>
