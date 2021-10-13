@@ -9,6 +9,7 @@ import { VideoService } from 'src/app/services/video.service';
 })
 export class VideoComponent implements OnInit {
   video: any;
+  timer: any;
   isVideoPlaying: boolean = false;
   @ViewChild('player') player: any;
 
@@ -32,7 +33,16 @@ export class VideoComponent implements OnInit {
   }
 
   isTyping = () => {
-    console.log('typing');
+    if (this.isVideoPlaying) {
+      this.pauseVideo();
+    }
+
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      if (!this.isVideoPlaying) {
+        this.playVideo();
+      }
+    }, 700);
   }
 
   private getCurrentRoute(): void {
