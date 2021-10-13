@@ -34,6 +34,15 @@
         </li>
         <li *ngIf="user" class="nav-item">
           <a
+            [routerLink]="['/submit-video']"
+            routerLinkActive="active"
+            class="nav-link"
+            aria-current="page"
+            >Submit Video</a
+          >
+        </li>
+        <li *ngIf="user" class="nav-item">
+          <a
             (click)="logout()"
             href="javascript: void(null)"
             routerLinkActive="active"

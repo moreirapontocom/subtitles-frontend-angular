@@ -15,6 +15,8 @@ import { UserService } from './services/user.service';
 import { VideoService } from './services/video.service';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { SubmitVideoComponent } from './views/submit-video/submit-video.component';
+import { YoutubeService } from './services/youtube.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     NavbarComponent,
     VideoComponent,
     LoginComponent,
+    SubmitVideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     AuthService,
     UserService,
     VideoService,
+    YoutubeService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

@@ -1,0 +1,15 @@
+<form (submit)="submitVideo(formSubmitVideo.value)" #formSubmitVideo="ngForm" novalidate>
+
+    <hr>
+    https://www.youtube.com/watch?v=2_FJrmft3uQ Felipe<br>
+    https://www.youtube.com/watch?v=EvJR-uBrPpo Patrick<br>
+    https://www.youtube.com/watch?v=75QmUkdXo8Q Patrick 2<br>
+    https://www.youtube.com/watch?v=0GDI1GScv0M Lucas<br>
+    <hr>
+
+    <div class="form-group">
+        <label>Video URL</label>
+        <input ngModel name="url" required type="url" class="input-control" placeholder="https://www.youtube.com/watch?v=...">
+    </div>
+    <button [disabled]="!formSubmitVideo.valid" type="submit" class="btn btn-primary">Submit Video</button>
+</form>

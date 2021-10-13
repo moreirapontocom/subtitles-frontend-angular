@@ -1,5 +1,24 @@
-<ul>
-  <li *ngFor="let video of videos" trackBy="video.id">
-    <a [routerLink]="['/videos', video.id]">{{ video.title }}</a>
-  </li>
-</ul>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Vídeo title</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let video of videos" trackBy="video.id">
+        <td>{{ video.title }}</td>
+        <td>
+          <div class="badge bg-secondary">{{ video.status }}</div>
+        </td>
+        <td class="text-right">
+          <a [routerLink]="['/videos', video.id]" class="btn btn-secondary"
+            >Editor</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

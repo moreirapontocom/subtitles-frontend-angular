@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from 'src/app/services/video.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class VideoComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private videoService: VideoService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -65,29 +66,10 @@ export class VideoComponent implements OnInit {
       });
   };
 
-  // fullscreen = () => {
-    // const elem = this.playerVimeo.nativeElement;
-    // if (elem.requestFullscreen) {
-    //   elem.requestFullscreen();
-    // } else if (elem.msRequestFullscreen) {
-    //   elem.msRequestFullscreen();
-    // } else if (elem.mozRequestFullScreen) {
-    //   elem.mozRequestFullScreen();
-    // } else if (elem.webkitRequestFullscreen) {
-    //   elem.webkitRequestFullscreen();
-    // }
-  // };
-
-  // playVideo = () => {
-  //   console.log('PLAY no video');
-  //   // this.videoPlayer.nativeElement.src = 'https://www.youtube.com/embed/2_FJrmft3uQ';
-  //   this.videoPlayer.nativeElement.src =
-  //     'https://player.vimeo.com/external/614439487.hd.mp4?s=f43d687271ef9f62c2cf0c4996e8dca74d4e1fd1&profile_id=175';
-  //   // this.videoPlayer.nativeElement.src = this.video.url;
-  //   // console.log(this.video.url)
-  //   const _this = this;
-  //   setTimeout(() => {
-  //     _this.videoPlayer.nativeElement.play();
-  //   }, 10);
-  // };
+  deleteVideo = () => {
+    this.videoService.deleteVideo(this.video.id).subscribe((response: any) => {
+      console.log(response);
+      this.router.navigate(['/videos']);
+    });
+  };
 }

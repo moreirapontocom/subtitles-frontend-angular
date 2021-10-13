@@ -20,4 +20,12 @@ export class VideoService {
   updateVideo = (id: number, formData: any): Observable<any> => {
     return this.http.patch<any>(`${environment.api}/items/videos/${id}`, formData);
   }
+
+  createVideo = (formData: any): Observable<any> => {
+    return this.http.post<any>(`${environment.api}/items/videos`, formData);
+  }
+
+  deleteVideo = (id: number): Observable<any> => {
+    return this.http.delete<any>(`${environment.api}/items/videos/${id}`);
+  }
 }

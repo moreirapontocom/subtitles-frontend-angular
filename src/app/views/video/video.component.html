@@ -6,7 +6,7 @@
       <div class="col-6">
         <youtube-player
           #player
-          [videoId]="video.url"
+          [videoId]="video.video_id"
           [playerVars]="{ controls: 0 }"
           suggestedQuality="highres"
           [height]="315"
@@ -80,4 +80,5 @@
       </div>
     </div>
   </div>
+  <button (click)="deleteVideo()" class="btn btn-danger">Delete Video</button>
 </ng-container>
