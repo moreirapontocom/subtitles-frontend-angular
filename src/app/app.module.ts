@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { VideoService } from './services/video.service';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { scrollPositionRestoration: 'enabled' }),
+    YouTubePlayerModule,
   ],
   providers: [
     AuthService,

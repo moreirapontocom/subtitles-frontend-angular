@@ -1,24 +1,83 @@
-<div class="container">
-  <h1>Single Fake Video</h1>
+<ng-container *ngIf="video">
+  <div class="container">
+    <h1>{{ video.title }}</h1>
 
-  <div class="row">
-    <div class="col-6">Aqui tem o vídeo</div>
-    <div class="col-6">
-      <textarea
-        cols=""
-        rows="10"
-        class="form-control"
-        placeholder="Aqui tem a box da legenda"
-      ></textarea>
-
-      <div class="mt-2">
-        <button type="button" class="btn btn-secondary me-2">
-          Salvar Rascunho
-        </button>
-        <button type="button" class="btn btn-primary">
-          <i class="fab fa-youtube me-1"></i> Publicar
-        </button>
+    <div class="row">
+      <div class="col-6">
+        <youtube-player
+          #player
+          [videoId]="video.url"
+          [playerVars]="{ controls: 0 }"
+          suggestedQuality="highres"
+          [height]="315"
+          [width]="560"
+        >
+        </youtube-player>
+      </div>
+      <div class="col-6">
+        <form #formSubtitle="ngForm" novalidate>
+          <textarea
+            [ngModel]="video.subtitles"
+            (keypress)="isTyping()"
+            name="subtitles"
+            cols=""
+            rows="10"
+            class="form-control"
+            required
+            placeholder="Aqui tem a box da legenda"
+          ></textarea>
+          <div class="mt-2">
+            <div class="row">
+              <div class="col-3">
+                <button
+                  *ngIf="!isVideoPlaying"
+                  (click)="playVideo()"
+                  type="button"
+                  class="btn btn-secondary me-2"
+                >
+                  <i class="fas fa-play me-1"></i> Play
+                </button>
+                <button
+                  *ngIf="isVideoPlaying"
+                  (click)="pauseVideo()"
+                  type="button"
+                  class="btn btn-secondary"
+                >
+                  <i class="fas fa-pause me-1"></i> Pause
+                </button>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <select
+                        [ngModel]="video.status"
+                        name="status"
+                        class="form-select"
+                      >
+                        <option value="0created">0created</option>
+                        <option value="1not_started">1not_started</option>
+                        <option value="2in_progress">2in_progress</option>
+                        <option value="3completed">3completed</option>
+                        <option value="4published">4published</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-3 d-grid">
+                    <button
+                      (click)="save(formSubtitle.value)"
+                      type="button"
+                      class="btn btn-secondary"
+                    >
+                      Salvar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
+</ng-container>

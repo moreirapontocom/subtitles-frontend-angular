@@ -12,4 +12,12 @@ export class VideoService {
   getVideos = (): Observable<any> => {
     return this.http.get<string>(`${environment.api}/items/videos`);
   };
+
+  getVideoById = (id: number): Observable<any> => {
+    return this.http.get<string>(`${environment.api}/items/videos/${id}`);
+  };
+
+  updateVideo = (id: number, formData: any): Observable<any> => {
+    return this.http.patch<any>(`${environment.api}/items/videos/${id}`, formData);
+  }
 }
