@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ssh lucas@165.227.178.114 -p2223 'cd /var/www/html/captions-frontend && git pull origin main && npm i && ng build --aot'"
+    "deploy": "ng build --aot && firebase deploy"
   },
   "private": true,
   "dependencies": {
