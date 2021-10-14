@@ -2,6 +2,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Channel Title</th>
         <th>Vídeo title</th>
         <th>Status</th>
         <th></th>
@@ -9,12 +10,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let video of videos" trackBy="video.id">
+        <td>{{ video.channel_title }}</td>
         <td>{{ video.title }}</td>
         <td>
           <div class="badge bg-secondary">{{ video.status }}</div>
         </td>
         <td class="text-right">
-          <a [routerLink]="['/videos', video.id]" class="btn btn-secondary"
+          <a [routerLink]="['/videos', video.id]" class="btn btn-secondary btn-sm"
             >Editor</a
           >
         </td>
