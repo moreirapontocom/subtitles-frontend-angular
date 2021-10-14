@@ -30,4 +30,8 @@ export class AuthService {
   login = (form: any): Observable<any> => {
     return this.http.post<any>(`${environment.api}/auth/login`, form);
   };
+
+  refreshToken = (): Observable<any> => {
+    return this.http.post<any>(`${environment.api}/auth/refresh`, { refresh_token: (this.getUser()).refresh_token });
+  };
 }
