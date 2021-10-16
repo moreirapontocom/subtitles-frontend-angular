@@ -51,7 +51,7 @@ export class YoutubeCaptionFetchComponent implements OnInit {
 
         localStorage.setItem('youtubeAccessToken', JSON.stringify(this.youtubeAccessToken));
 
-        fetch(`http://localhost:8055/youtube-auth`, {
+        fetch(`${environment.api}/youtube-auth`, {
           method: "POST",
           body: JSON.stringify({ accesst: this.youtubeAccessToken }),
           headers: {
@@ -61,24 +61,27 @@ export class YoutubeCaptionFetchComponent implements OnInit {
           .then(response => response.text())
           .then((result: any) => {
 
-            /**
-             * Captions response:
-             * 
-             * 0:00:01.100,0:00:07.700
-             * Line 1
-             * Line 2
-             * 
-             * 0:00:07.700,0:00:12.380
-             * Line 1
-             * Line 2
-             */
+            if (result) {
 
-            const capturedCaption = JSON.parse(result)
-              .replace(/([0-9]{1,2}\:[0-9]{1,2}\:[0-9]{1,2}\.[0-9]{3}(\,)?)/gm, "") // Remove timestamps
-              .replace(/^\s*[\r\n]/gm, "\r\n") // Replace multiple empty lines by one empty line
-              .replace(/^\s*[\r\n]/, ""); // Remove first empty line
+              /**
+               * Captions response:
+               * 
+               * 0:00:01.100,0:00:07.700
+               * Line 1
+               * Line 2
+               * 
+               * 0:00:07.700,0:00:12.380
+               * Line 1
+               * Line 2
+               */
 
-            this.caption = capturedCaption;
+              const capturedCaption = JSON.parse(result)
+                .replace(/([0-9]{1,2}\:[0-9]{1,2}\:[0-9]{1,2}\.[0-9]{3}(\,)?)/gm, "") // Remove timestamps
+                .replace(/^\s*[\r\n]/gm, "\r\n") // Replace multiple empty lines by one empty line
+                .replace(/^\s*[\r\n]/, ""); // Remove first empty line
+
+              this.caption = capturedCaption;
+            }
           })
           .catch(error => console.log('error', error));
       }
@@ -96,7 +99,7 @@ export class YoutubeCaptionFetchComponent implements OnInit {
     // Parameters to pass to OAuth 2.0 endpoint.
     const params: any = {
       client_id: environment.youtubeApiClientId,
-      redirect_uri: `http://localhost:4200/videos/caption-request`,
+      redirect_uri: `${environment.client}/videos/caption-request`,
       response_type: 'token',
       scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
       include_granted_scopes: 'true',
