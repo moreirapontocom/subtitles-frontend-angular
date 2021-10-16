@@ -27,12 +27,16 @@ export class LoginComponent implements OnInit {
         this.authService.setUser(user);
         this.messageService.sendMessage('NavbarComponent', 'login', user);
         this.router.navigate(['/videos']);
+      }, err => {
+        console.log('Error getUserProfile() >> ', err);
       });
   };
 
   login = (form: any) => {
     this.authService.login(form).subscribe((response: any) => {
       this.getUserProfile(response);
+    }, err => {
+      console.log('Error login() >> ', err);
     });
   };
 }
