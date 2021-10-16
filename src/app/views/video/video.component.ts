@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from 'src/app/services/video.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-video',
@@ -21,6 +22,11 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentRoute();
+    this.removeCurrentVideoStorage();
+  }
+
+  private removeCurrentVideoStorage = () => {
+    localStorage.removeItem('videoId');
   }
 
   playVideo = () => {
@@ -63,13 +69,54 @@ export class VideoComponent implements OnInit {
       .updateVideo(this.video.id, formData)
       .subscribe((response: any) => {
         console.log(response);
+
+        if (formData.status === '4published') {
+          this.publishCaptionToYoutube();
+        }
       });
   };
+
+  private publishCaptionToYoutube = () => {
+    console.log('Manda pro Youtube');
+
+    /*
+    const youtubeAccessToken = localStorage.getItem('youtubeAccessToken');
+    if (youtubeAccessToken) {
+
+      fetch(`https://youtube.googleapis.com/youtube/v3/captions?part=snippet&key=${environment.youtubeApiKey}`, {
+          method: "POST",
+          body: JSON.stringify({
+            snippet: {
+              language: 'es',
+              name: 'Spanish captions',
+              videoId: this.video.youtube_id,
+              isDraft: true,
+            },
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${JSON.parse(youtubeAccessToken)}`
+          }
+        })
+          .then(response => response.text())
+          .then((result: any) => {
+            console.log('result mandou pro Youtube >> ', result);
+          }).catch(error => {
+            console.log('error mandou pro Youtube >> ', error);
+          });
+    }
+    */
+  }
 
   deleteVideo = () => {
     this.videoService.deleteVideo(this.video.id).subscribe((response: any) => {
       console.log(response);
       this.router.navigate(['/videos']);
     });
+  };
+
+  redirectToYoutubeCaptionsFetch = () => {
+    localStorage.setItem('videoId', this.video.id);
+    this.router.navigate(['/videos/caption-request']);
   };
 }

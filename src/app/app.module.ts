@@ -17,6 +17,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { SubmitVideoComponent } from './views/submit-video/submit-video.component';
 import { YoutubeService } from './services/youtube.service';
+import { YoutubeCaptionFetchComponent } from './views/youtube-caption-fetch/youtube-caption-fetch.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { YoutubeService } from './services/youtube.service';
     VideoComponent,
     LoginComponent,
     SubmitVideoComponent,
+    YoutubeCaptionFetchComponent,
   ],
   imports: [
     BrowserModule,

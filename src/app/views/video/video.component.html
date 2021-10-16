@@ -13,8 +13,21 @@
           [width]="560"
         >
         </youtube-player>
+        <div class="text-muted">
+          <small>{{ video.video_id }}</small>
+        </div>
       </div>
       <div class="col-6">
+        <div class="mb-2">
+          <button
+            (click)="redirectToYoutubeCaptionsFetch()"
+            type="button"
+            class="btn btn-danger"
+          >
+            <i class="fab fa-youtube me-2"></i> Buscar legendas automáticas do Youtube
+          </button>
+        </div>
+
         <form #formSubtitle="ngForm" novalidate>
           <textarea
             [ngModel]="video.subtitles"
@@ -79,6 +92,11 @@
         </form>
       </div>
     </div>
+
+    <div class="mt-3">
+      <button (click)="deleteVideo()" class="btn btn-warning">
+        <i class="fas fa-exclamation-triangle me-2"></i> Delete Video
+      </button>
+    </div>
   </div>
-  <button (click)="deleteVideo()" class="btn btn-danger">Delete Video</button>
 </ng-container>

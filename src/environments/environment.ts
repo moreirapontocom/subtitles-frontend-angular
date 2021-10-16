@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   api: "http://localhost:8055",
   youtubeApiKey: "AIzaSyC-FhFJq7JYcqio6AKMSCpxmMXcUBrDg7o",
+  youtubeApiClientId: "696404688388-efcv0009novvt7c7mf6pjak2vs5hrlsk.apps.googleusercontent.com",
 };
 
 /*

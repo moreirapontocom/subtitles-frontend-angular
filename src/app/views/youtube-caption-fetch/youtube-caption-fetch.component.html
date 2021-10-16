@@ -1,0 +1,25 @@
+<div class="mt-2">
+    <div class="container">
+    <button (click)="youtubeOAuthSignIn()" type="button" class="btn btn-danger">
+        <i class="fab fa-youtube me-2"></i> Buscar Legenda
+    </button>
+
+    <div class="mt-2 mb-2">
+        <div class="form-group">
+            <textarea class="form-control" cols="" rows="10">{{ caption }}</textarea>
+        </div>
+    </div>
+
+    <button
+        (click)="returnToVideoWithoutUsingCapturedCaption()"
+        type="button"
+        class="btn btn-secondary me-2"
+    >
+        Cancelar
+    </button>
+
+    <button (click)="useCaption()" type="button" class="btn btn-primary">
+        Utilizar esta legenda
+    </button>
+    </div>
+</div>
