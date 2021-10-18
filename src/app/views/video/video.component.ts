@@ -26,7 +26,7 @@ export class VideoComponent implements OnInit {
   }
 
   private removeCurrentVideoStorage = () => {
-    localStorage.removeItem('videoId');
+    localStorage.removeItem('videoIDs');
   }
 
   playVideo = () => {
@@ -67,9 +67,7 @@ export class VideoComponent implements OnInit {
   save = (formData: any) => {
     this.videoService
       .updateVideo(this.video.id, formData)
-      .subscribe((response: any) => {
-        console.log(response);
-
+      .subscribe(() => {
         if (formData.status === '4published') {
           this.publishCaptionToYoutube();
         }
@@ -110,13 +108,12 @@ export class VideoComponent implements OnInit {
 
   deleteVideo = () => {
     this.videoService.deleteVideo(this.video.id).subscribe((response: any) => {
-      console.log(response);
       this.router.navigate(['/videos']);
     });
   };
 
   redirectToYoutubeCaptionsFetch = () => {
-    localStorage.setItem('videoId', this.video.id);
+    localStorage.setItem('videoIDs', JSON.stringify({ videoId: this.video.id, youtubeVideoId: this.video.video_id }));
     this.router.navigate(['/videos/caption-request']);
   };
 }
