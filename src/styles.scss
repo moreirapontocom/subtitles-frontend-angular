@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap');
+
+body {
+    background-color: #f3f5f7;
+    font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.card {
+    border: none;
+}
+
+.page-description {
+    color: #444;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.videos-list {
+    .videos-filter {
+        margin-bottom: 30px;
+
+        select {
+            border: none;
+        }
+    }
+
+    .video-item {
+        margin-bottom: 40px;
+
+        a,
+        a:link,
+        a:hover {
+            text-decoration: none;
+            color: #414141;
+        }
+
+        .cover {
+            margin-bottom: 10px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 172px;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+    }
+}

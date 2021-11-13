@@ -1,0 +1,16 @@
+$baseSize: 30px;
+
+.acronym {
+    display: inline-block;
+    text-align: center;
+    margin-top: -2px;
+    background-color: #ccc;
+    border-radius: 50px;
+    line-height: $baseSize;
+    height: $baseSize;
+    width: $baseSize;
+    color: #333;
+    font-size: 0.7rem;
+    text-align: center;
+    margin-right: 7px;
+}

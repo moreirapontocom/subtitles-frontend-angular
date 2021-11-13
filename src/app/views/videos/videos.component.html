@@ -1,26 +1,36 @@
-<div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Channel Title</th>
-        <th>Vídeo title</th>
-        <th>Status</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let video of videos" trackBy="video.id">
-        <td>{{ video.channel_title }}</td>
-        <td>{{ video.title }}</td>
-        <td>
-          <div class="badge bg-secondary">{{ video.status }}</div>
-        </td>
-        <td class="text-right">
-          <a [routerLink]="['/videos', video.id]" class="btn btn-secondary btn-sm"
-            >Editor</a
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container videos-list">
+  <h1>Videos</h1>
+  <p class="page-description">Here comes your videos to be captionized.</p>
+
+  <div class="row videos-filter">
+    <div class="col-12 col-md-3">
+      <select title="Filter job status" class="form-select">
+        <option value="all">All status</option>
+        <option value="0created">{{ "0created" | jobStatus:"label" }}</option>
+        <option value="1not_started">{{ "1not_started" | jobStatus:"label" }}</option>
+        <option value="2in_progress">{{ "2in_progress" | jobStatus:"label" }}</option>
+        <option value="3completed">{{ "3completed" | jobStatus:"label" }}</option>
+        <option value="4published" disabled>{{ "4published" | jobStatus:"label" }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div
+      *ngFor="let video of videos"
+      trackBy="video.id"
+      class="col col-3 video-item"
+    >
+      <a [routerLink]="['/videos', video.id]">
+        <div
+          class="cover"
+          [style]="{ 'background-image': 'url(' + video.cover + ')' }"
+        ></div>
+        <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
+          {{ video.status | jobStatus: "label" }}
+        </div>
+        <h2>{{ video.title | truncate: 60 }}</h2>
+      </a>
+    </div>
+  </div>
 </div>

@@ -18,6 +18,9 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { SubmitVideoComponent } from './views/submit-video/submit-video.component';
 import { YoutubeService } from './services/youtube.service';
 import { YoutubeCaptionFetchComponent } from './views/youtube-caption-fetch/youtube-caption-fetch.component';
+import { TruncatePipe } from './helpers/truncate.pipe';
+import { JobStatusPipe } from './helpers/jobStatus.pipe';
+import { AcronymComponent } from './components/acronym/acronym.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { YoutubeCaptionFetchComponent } from './views/youtube-caption-fetch/yout
     LoginComponent,
     SubmitVideoComponent,
     YoutubeCaptionFetchComponent,
+    TruncatePipe,
+    JobStatusPipe,
+    AcronymComponent,
   ],
   imports: [
     BrowserModule,
