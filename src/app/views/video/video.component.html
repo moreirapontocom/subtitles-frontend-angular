@@ -1,107 +1,130 @@
 <ng-container *ngIf="video">
   <div class="container">
+    <div class="mb-3">
+      <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
+        {{ video.status | jobStatus: "label" }}
+      </div>
+    </div>
     <h1>{{ video.title }}</h1>
     <p class="page-description">
       Here comes the specific video to be captionized.
     </p>
 
-    
-        <div class="row">
-          <div class="col col-6">
-            <youtube-player
-              #player
-              [videoId]="video.video_id"
-              [playerVars]="{ controls: 0 }"
-              suggestedQuality="highres"
-              [height]="315"
-              [width]="560"
-            >
-            </youtube-player>
-
-            <div class="mt-2">
-              <button
-                *ngIf="!isVideoPlaying"
-                (click)="playVideo()"
-                type="button"
-                class="btn btn-secondary me-2"
-              >
-                <i class="fas fa-play me-1"></i> Play
-              </button>
-              <button
-                *ngIf="isVideoPlaying"
-                (click)="pauseVideo()"
-                type="button"
-                class="btn btn-secondary"
-              >
-                <i class="fas fa-pause me-1"></i> Pause
-              </button>
+    <div class="row mb-5">
+      <div class="col-12 col-md-4">
+        <div class="card card-body">
+          <div class="row align-items-center">
+            <div class="col">
+              <button (click)="startCaptions()" class="btn btn-secondary me-3" [disabled]="video.consultant_id !== null">{{ (video.consultant_id === null) ? 'Start Captions' : 'Captured' }}</button>
+            </div>
+            <div *ngIf="video.consultant_id !== null" class="col text-end">
+              <app-acronym [value]="composeUserFullName()" color="#0099CC" fgColor="#FFFFFF"></app-acronym>
             </div>
           </div>
-          <div class="col col-6">
+        </div>
+      </div>
+    </div>
 
-            <div class="card card-body">
-
-            <form #formSubtitle="ngForm" novalidate>
-              <label>Captions</label>
-              <textarea
-                [ngModel]="video.subtitles"
-                (keyup)="isTyping()"
-                name="subtitles"
-                cols=""
-                rows="10"
-                class="form-control"
-                required
-                placeholder="Aqui tem a box da legenda"
-              ></textarea>
-              <div class="mt-2">
-
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <select
-                        [ngModel]="video.status"
-                        title="Job status"
-                        name="status"
-                        class="form-select"
-                      >
-                        <option value="0created">
-                          {{ "0created" | jobStatus: "label" }}
-                        </option>
-                        <option value="1not_started">
-                          {{ "1not_started" | jobStatus: "label" }}
-                        </option>
-                        <option value="2in_progress">
-                          {{ "2in_progress" | jobStatus: "label" }}
-                        </option>
-                        <option value="3completed">
-                          {{ "3completed" | jobStatus: "label" }}
-                        </option>
-                        <option value="4published" disabled>
-                          {{ "4published" | jobStatus: "label" }}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-3 d-grid">
-                    <button
-                      (click)="save(formSubtitle.value)"
-                      type="button"
-                      class="btn btn-primary"
-                    >
-                      Salvar
-                    </button>
-                  </div>
+    <div class="row">
+      <div class="col col-6">
+        <div class="video-placeholder">
+          <youtube-player
+            #player
+            [videoId]="video.video_id"
+            [playerVars]="{ controls: 0 }"
+            suggestedQuality="highres"
+            [height]="365"
+            [width]="648"
+          >
+          </youtube-player>
+        </div>
+        <div class="row mt-2 align-items-center">
+          <div class="col-3">
+            <button
+              *ngIf="!isVideoPlaying"
+              (click)="playVideo()"
+              type="button"
+              class="btn btn-secondary me-2"
+            >
+              <i class="fas fa-play me-1"></i> Play
+            </button>
+            <button
+              *ngIf="isVideoPlaying"
+              (click)="pauseVideo()"
+              type="button"
+              class="btn btn-secondary"
+            >
+              <i class="fas fa-pause me-1"></i> Pause
+            </button>
+          </div>
+          <div class="col-9 text-end text-muted">
+            <label>
+              <input [ngModel]="pauseWhileTyping" name="pauseWhileTyping" (change)="pauseWhileTyping = !pauseWhileTyping" type="checkbox" title="Pause video while typing"> Pause while typing
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col col-6">
+        <form #formSubtitle="ngForm" novalidate>
+          <textarea
+            [ngModel]="video.subtitles"
+            (keyup)="isTyping()"
+            name="subtitles"
+            cols=""
+            rows="14"
+            class="form-control"
+            required
+            placeholder="Aqui tem a box da legenda"
+          ></textarea>
+          <div class="mt-2">
+            <div class="row">
+              <div class="col-4 offset-md-5">
+                <div class="form-group">
+                  <select
+                    [ngModel]="video.status"
+                    title="Job status"
+                    name="status"
+                    class="form-select"
+                  >
+                    <option value="0created">
+                      {{ "0created" | jobStatus: "label" }}
+                    </option>
+                    <option value="1not_started">
+                      {{ "1not_started" | jobStatus: "label" }}
+                    </option>
+                    <option value="2in_progress">
+                      {{ "2in_progress" | jobStatus: "label" }}
+                    </option>
+                    <option value="3completed">
+                      {{ "3completed" | jobStatus: "label" }}
+                    </option>
+                    <option value="4published" disabled>
+                      {{ "4published" | jobStatus: "label" }}
+                    </option>
+                  </select>
                 </div>
               </div>
-            </form>
-
+              <div class="col-3 d-grid">
+                <button
+                  (click)="save(formSubtitle.value)"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  Salvar
+                </button>
+              </div>
+            </div>
           </div>
-
+        </form>
       </div>
     </div>
 
     <div class="mt-3">
-      <button (click)="deleteVideo()" type="button" class="btn btn-outline-danger">
+      <button
+        (click)="deleteVideo()"
+        type="button"
+        class="btn btn-outline-danger"
+      >
         <i class="fas fa-trash mr-2"></i> Remove video
       </button>
     </div>

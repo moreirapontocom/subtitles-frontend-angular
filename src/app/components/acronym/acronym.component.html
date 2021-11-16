@@ -1,1 +1,3 @@
-<span class="acronym">{{ value }}</span> {{ hide ? null : value }}
+<div class="acronym">
+    <span [ngStyle]="{ 'background-color' : color, 'color': fgColor }">{{ acronym }}</span> {{ hide ? null : value }}
+</div>

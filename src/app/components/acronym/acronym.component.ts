@@ -6,6 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./acronym.component.scss'],
 })
 export class AcronymComponent implements OnInit {
+  acronym: string = '';
+  @Input() color: string = '#ccc';
+  @Input() fgColor: string = '#333';
   @Input() value: string = '';
   @Input() hide: boolean = false;
 
@@ -15,10 +18,10 @@ export class AcronymComponent implements OnInit {
     this.getAcronym();
   }
 
-  private getAcronym = (): string => {
-    const acronym = this.value.indexOf(' ') >= 0
+  private getAcronym = (): void => {
+    const displayValue = this.value.indexOf(' ') >= 0
       ? this.value.split(' ')[0][0] + this.value.split(' ')[1][0]
       : this.value.substring(0, 2);
-    return acronym.toUpperCase();
+    this.acronym = displayValue.toUpperCase();
   };
 }

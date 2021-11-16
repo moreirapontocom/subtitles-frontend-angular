@@ -4,13 +4,13 @@
 
   <div class="row videos-filter">
     <div class="col-12 col-md-3">
-      <select title="Filter job status" class="form-select">
+      <select (change)="filterJobsByStatus()" [(ngModel)]="filterStatus" title="Filter job status" class="form-select">
         <option value="all">All status</option>
         <option value="0created">{{ "0created" | jobStatus:"label" }}</option>
         <option value="1not_started">{{ "1not_started" | jobStatus:"label" }}</option>
         <option value="2in_progress">{{ "2in_progress" | jobStatus:"label" }}</option>
         <option value="3completed">{{ "3completed" | jobStatus:"label" }}</option>
-        <option value="4published" disabled>{{ "4published" | jobStatus:"label" }}</option>
+        <option value="4published">{{ "4published" | jobStatus:"label" }}</option>
       </select>
     </div>
   </div>

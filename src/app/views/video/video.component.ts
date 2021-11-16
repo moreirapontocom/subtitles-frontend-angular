@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { VideoService } from 'src/app/services/video.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,21 +10,31 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./video.component.scss'],
 })
 export class VideoComponent implements OnInit {
+  user: any;
   video: any;
   timer: any;
   isVideoPlaying: boolean = false;
+  pauseWhileTyping: boolean = true;
   @ViewChild('player') player: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private videoService: VideoService,
     private router: Router,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
+    this.getUser();
     this.getCurrentRoute();
     this.removeCurrentVideoStorage();
   }
+
+  private getUser(): void {
+    this.user = this.authService.getUser();
+  }
+
+  composeUserFullName = () => `${this.user.first_name} ${this.user.last_name}`;
 
   private removeCurrentVideoStorage = () => {
     localStorage.removeItem('videoIDs');
@@ -40,13 +51,13 @@ export class VideoComponent implements OnInit {
   }
 
   isTyping = () => {
-    if (this.isVideoPlaying) {
+    if (this.isVideoPlaying && this.pauseWhileTyping) {
       this.pauseVideo();
     }
 
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
-      if (!this.isVideoPlaying) {
+      if (!this.isVideoPlaying && this.pauseWhileTyping) {
         this.playVideo();
       }
     }, 700);
@@ -63,6 +74,12 @@ export class VideoComponent implements OnInit {
       this.video = response.data;
     });
   };
+
+  startCaptions = () => {
+    this.videoService.captureVideo(this.video.id, this.user.id).subscribe((response: any) => {
+      this.video.consultant_id = this.user.id;
+    });
+  }
 
   save = (formData: any) => {
     this.videoService

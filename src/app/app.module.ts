@@ -21,6 +21,7 @@ import { YoutubeCaptionFetchComponent } from './views/youtube-caption-fetch/yout
 import { TruncatePipe } from './helpers/truncate.pipe';
 import { JobStatusPipe } from './helpers/jobStatus.pipe';
 import { AcronymComponent } from './components/acronym/acronym.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AcronymComponent } from './components/acronym/acronym.component';
     TruncatePipe,
     JobStatusPipe,
     AcronymComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

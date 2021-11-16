@@ -8,6 +8,8 @@ import { VideoService } from 'src/app/services/video.service';
 })
 export class VideosComponent implements OnInit {
   videos: Array<any> = [];
+  videosImutable: Array<any> = [];
+  filterStatus: string = 'all';
 
   constructor(private videoService: VideoService) {}
 
@@ -18,6 +20,13 @@ export class VideosComponent implements OnInit {
   private getVideos = () => {
     this.videoService.getVideos().subscribe((response: any) => {
       this.videos = response.data;
+      this.videosImutable = response.data;
     });
   };
+
+  filterJobsByStatus = () => {
+    this.videos = (this.filterStatus === 'all') ?
+      this.videosImutable :
+      this.videosImutable.filter((item) => item.status === this.filterStatus);
+  }
 }

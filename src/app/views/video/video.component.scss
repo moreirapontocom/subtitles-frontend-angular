@@ -1,0 +1,23 @@
+textarea,
+select,
+button.btn.btn-primary {
+  border: solid 1px transparent;
+
+  &:focus,
+  &:active {
+    border: solid 1px transparent;
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+textarea {
+    height: 365px;
+    resize: none;
+}
+
+.video-placeholder {
+    height: 365px;
+    width: 648px;
+    background-color: black;
+}

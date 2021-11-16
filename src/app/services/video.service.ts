@@ -28,4 +28,9 @@ export class VideoService {
   deleteVideo = (id: number): Observable<any> => {
     return this.http.delete<any>(`${environment.api}/items/videos/${id}`);
   }
+
+  // Used by consultants to get video for starting captioning
+  captureVideo = (id: number, consultant_id: string): Observable<any> => {
+    return this.http.patch<any>(`${environment.api}/items/videos/${id}`, { consultant_id, status: '2in_progress' });
+  }
 }
