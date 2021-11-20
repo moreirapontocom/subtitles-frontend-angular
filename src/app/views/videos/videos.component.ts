@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HelpersService } from 'src/app/helpers/helpers';
 import { VideoService } from 'src/app/services/video.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class VideosComponent implements OnInit {
   videosImutable: Array<any> = [];
   filterStatus: string = 'all';
 
-  constructor(private videoService: VideoService) {}
+  constructor(
+    private videoService: VideoService,
+    public readonly helpers: HelpersService,
+  ) {}
 
   ngOnInit(): void {
     this.getVideos();

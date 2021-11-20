@@ -89,20 +89,8 @@
                       name="status"
                       class="form-select"
                     >
-                      <option [disabled]="isConsultant" value="0created">
-                        {{ "0created" | jobStatus: "label" }}
-                      </option>
-                      <option [disabled]="isConsultant" value="1not_started">
-                        {{ "1not_started" | jobStatus: "label" }}
-                      </option>
-                      <option value="2in_progress">
-                        {{ "2in_progress" | jobStatus: "label" }}
-                      </option>
-                      <option value="3completed">
-                        {{ "3completed" | jobStatus: "label" }}
-                      </option>
-                      <option value="4published" disabled>
-                        {{ "4published" | jobStatus: "label" }}
+                      <option *ngFor="let status of helpers.availableJobStatus" [disabled]="['0created','1not_started'].includes(status.id) && isConsultant" [value]="status.id">
+                        {{ status.label }}
                       </option>
                     </select>
                   </div>
