@@ -25,6 +25,15 @@
         </li>
         <li *ngIf="user" class="nav-item">
           <a
+            class="nav-link"
+            aria-current="page"
+            >
+              <app-acronym [value]="user | fullName" [hide]="true"></app-acronym> {{ user | fullName }}
+            </a
+          >
+        </li>
+        <li *ngIf="user" class="nav-item">
+          <a
             [routerLink]="['/videos']"
             routerLinkActive="active"
             class="nav-link"
@@ -32,7 +41,7 @@
             >All Videos</a
           >
         </li>
-        <li *ngIf="user" class="nav-item">
+        <li *ngIf="user && !helpers.isConsultant()" class="nav-item">
           <a
             [routerLink]="['/submit-video']"
             routerLinkActive="active"

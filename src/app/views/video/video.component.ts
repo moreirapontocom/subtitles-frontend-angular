@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HelpersService } from 'src/app/helpers/helpers';
 import { AuthService } from 'src/app/services/auth.service';
 import { VideoService } from 'src/app/services/video.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-video',
@@ -15,6 +15,7 @@ export class VideoComponent implements OnInit {
   timer: any;
   isVideoPlaying: boolean = false;
   pauseWhileTyping: boolean = true;
+  isConsultant: boolean = true;
   @ViewChild('player') player: any;
 
   constructor(
@@ -22,6 +23,7 @@ export class VideoComponent implements OnInit {
     private videoService: VideoService,
     private router: Router,
     private authService: AuthService,
+    public readonly helpers: HelpersService,
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +35,6 @@ export class VideoComponent implements OnInit {
   private getUser(): void {
     this.user = this.authService.getUser();
   }
-
-  composeUserFullName = () => `${this.user.first_name} ${this.user.last_name}`;
 
   private removeCurrentVideoStorage = () => {
     localStorage.removeItem('videoIDs');
@@ -72,8 +72,13 @@ export class VideoComponent implements OnInit {
   getVideo = (videoId: number): void => {
     this.videoService.getVideoById(videoId).subscribe((response: any) => {
       this.video = response.data;
+      this.canConsultantUpdateVideo();
     });
   };
+
+  canConsultantUpdateVideo = (): boolean => {
+    return (this.helpers.isConsultant() && this.user.id === this.video.consultant_id) ? true : false;
+  }
 
   startCaptions = () => {
     this.videoService.captureVideo(this.video.id, this.user.id).subscribe((response: any) => {

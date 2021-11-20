@@ -22,6 +22,8 @@ import { TruncatePipe } from './helpers/truncate.pipe';
 import { JobStatusPipe } from './helpers/jobStatus.pipe';
 import { AcronymComponent } from './components/acronym/acronym.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ComposeUserFullNamePipe } from './helpers/composeUserFullName.pipe';
+import { HelpersService } from './helpers/helpers';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { FooterComponent } from './components/footer/footer.component';
     JobStatusPipe,
     AcronymComponent,
     FooterComponent,
+    ComposeUserFullNamePipe,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { FooterComponent } from './components/footer/footer.component';
     UserService,
     VideoService,
     YoutubeService,
+    HelpersService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
