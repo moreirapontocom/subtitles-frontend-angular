@@ -16,6 +16,10 @@ textarea {
     resize: none;
 }
 
+.keep-line-breaks {
+  white-space: pre-wrap;
+}
+
 .video-placeholder {
     height: 365px;
     width: 648px;

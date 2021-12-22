@@ -119,7 +119,7 @@
               {{ video.status | jobStatus: "label" }}
             </div>
           </div>
-          {{ video.subtitles || 'Nenhuma legenda adicionada ainda' }}
+          <div [innerHtml]="video.subtitles || 'Nenhuma legenda adicionada ainda'" class="keep-line-breaks"></div>
         </ng-template>
       </div>
     </div>
