@@ -1,0 +1,11 @@
+<span class="video-item">
+    <a [routerLink]="hasLink ? ['/videos', video.id] : null">
+        <div class="cover" [style]="{ 'background-image': 'url(' + video.cover + ')' }"></div>
+
+        <div *ngIf="hasStatus" class="badge" [ngClass]="video.status | jobStatus: 'style'">
+            {{ video.status | jobStatus: "label" }}
+        </div>
+
+        <h2>{{ video.title | truncate: 60 }}</h2>
+    </a>
+</span>

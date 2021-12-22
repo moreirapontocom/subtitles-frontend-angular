@@ -26,38 +26,15 @@ h1 {
     margin-bottom: 20px;
 }
 
-.videos-list {
-    .videos-filter {
-        margin-bottom: 30px;
-
-        select {
-            border: none;
-        }
+.form-control {
+    &:focus,
+    &:active {
+        box-shadow: none;
+        outline: none;
     }
+}
 
-    .video-item {
-        margin-bottom: 40px;
-
-        a,
-        a:link,
-        a:hover {
-            text-decoration: none;
-            color: #414141;
-        }
-
-        .cover {
-            margin-bottom: 10px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 172px;
-            width: 100%;
-        }
-
-        h2 {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-top: 15px;
-        }
-    }
+.opaque {
+    opacity: 0.5;
+    -moz-opacity: 0.5;
 }

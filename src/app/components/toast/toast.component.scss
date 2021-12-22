@@ -1,0 +1,27 @@
+// 
+// TOAST
+// 
+
+.my-toast {
+    position: fixed;
+    top: 6%;
+    right: 10%;
+    z-index: 99999999999;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            background-color: #333;
+            color: white;
+            width: auto;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            float: right;
+            clear: both;
+            cursor: pointer;
+        }
+    }
+}

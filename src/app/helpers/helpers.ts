@@ -12,6 +12,10 @@ export class HelpersService {
         private authService: AuthService,
     ) { }
 
+    emojiRemover = (text: any) => {
+        return text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
+    }
+
     availableJobStatus: Array<{ id: string, label: string, style: string }> = [
         {
             id: '0created',

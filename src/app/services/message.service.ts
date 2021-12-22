@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
 
 export class MessageService {
 
-    auxiliar: any = undefined
+    auxiliar: any = undefined;
 
-    private subject = new Subject<any>()
+    private subject = new Subject<any>();
 
-    sendMessage = (target: string, action: string, payload: any = null) => this.subject.next({ target, action, payload })
+    sendMessage = (target: string, action: string, payload: any = null) => this.subject.next({ target, action, payload });
 
-    getMessage = (): Observable<any> => this.subject.asObservable()
+    getMessage = (): Observable<any> => this.subject.asObservable();
 
-    toast = (message: string) => this.sendMessage('ToastComponent', 'toast', message)
+    toast = (message: string) => this.sendMessage('ToastComponent', 'toast', message);
 }

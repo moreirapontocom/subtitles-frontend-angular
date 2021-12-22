@@ -24,6 +24,9 @@ import { AcronymComponent } from './components/acronym/acronym.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ComposeUserFullNamePipe } from './helpers/composeUserFullName.pipe';
 import { HelpersService } from './helpers/helpers';
+import { VideoItemComponent } from './components/video-item/video-item.component';
+import { ToastComponent } from './components/toast/toast.component';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { HelpersService } from './helpers/helpers';
     AcronymComponent,
     FooterComponent,
     ComposeUserFullNamePipe,
+    VideoItemComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,7 @@ import { HelpersService } from './helpers/helpers';
     VideoService,
     YoutubeService,
     HelpersService,
+    MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

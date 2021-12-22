@@ -2,79 +2,153 @@
   <h1>Submit new video</h1>
   <p class="page-description">Submit a new video to be captionized.</p>
 
-  <div class="mb-3">
-    <app-acronym value="1" [hide]="true"></app-acronym> Enter the video URL
-  </div>
-
-  <div class="card">
-    <div class="card-body">
+  <div class="row">
+    <div class="col-12 col-md-9">
       <form
         (submit)="submitVideo(formSubmitVideo.value)"
         #formSubmitVideo="ngForm"
         novalidate
       >
-        <p class="page-description mb-3 text-muted">
-          Aqui tem uma descrição do que o formulário faz.
-        </p>
-        <div class="mb-2">
-          <label>Video URL</label>
-          <input
-            ngModel
-            name="url"
-            required
-            type="url"
-            class="form-control"
-            placeholder="https://www.youtube.com/watch?v=..."
-          />
+        <!-- Import video -->
+        <div ngModelGroup="import" #importGroup="ngModelGroup">
+          <div class="mb-3">
+            <app-acronym
+              value="1"
+              [hide]="true"
+            ></app-acronym>
+            Enter the video URL <span class="text-danger">*</span>
+          </div>
+
+          <div class="card ms-3 mb-5">
+            <div class="card-body">
+              <div class="input-group mb-2">
+                <input
+                  (blur)="getVideoPreview(importGroup.value.url)"
+                  ngModel
+                  name="url"
+                  required
+                  type="url"
+                  class="form-control"
+                  placeholder="https://www.youtube.com/watch?v=..."
+                />
+                <button
+                  (click)="getVideoPreview(importGroup.value.url)"
+                  [disabled]="!importGroup.valid"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  Get Preview
+                </button>
+              </div>
+              <p class="page-description mb-3 text-muted">
+                https://www.youtube.com/watch?v=b4F-UHL4DaM
+              </p>
+            </div>
+          </div>
         </div>
-        <button
-          [disabled]="!formSubmitVideo.valid"
-          type="submit"
-          class="btn btn-primary"
-        >
-          Import video
-        </button>
+
+        <!-- Language settings -->
+        <div ngModelGroup="languages" #languagesGroup="ngModelGroup">
+          <div class="mt-4 mb-3">
+            <app-acronym
+              value="2"
+              [hide]="true"
+            ></app-acronym>
+            Set up languages <span class="text-danger">*</span>
+          </div>
+
+          <div class="card ms-3 mb-5">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-5">
+                  <select
+                    ngModel
+                    name="lang_original"
+                    required
+                    class="form-select"
+                    title="Language"
+                  >
+                    <option value="">Idioma do vídeo</option>
+                    <option value="pt-BR">Português (Brasil)</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-2 text-center">
+                  <span class="fas fa-arrow-right"></span>
+                </div>
+                <div class="col-12 col-md-5">
+                  <select
+                    ngModel
+                    name="lang_target"
+                    required
+                    class="form-select"
+                    title="Language"
+                  >
+                    <option value="">Idioma das legendas</option>
+                    <option value="pt-BR">Português (Brasil)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fetch from Youtube -->
+        <div class="mt-4 mb-3">
+          <app-acronym
+            value="3"
+            [hide]="true"
+          ></app-acronym>
+          Fetch Youtube auto-generated captions
+          <span class="text-muted">(optional)</span>
+        </div>
+
+        <div class="card ms-3 mb-5">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 col-md-8">
+                <p class="page-description mb-3 text-muted">
+                  Aqui tem uma descrição do que o formulário faz.
+                </p>
+              </div>
+              <div class="col-12 col-md-4 d-flex">
+                <button
+                  disabled
+                  type="button"
+                  class="btn btn-danger ms-auto"
+                >
+                  <i class="fab fa-youtube mr-2"></i> Connect to Youtube
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 ms-3">
+          <button
+            [disabled]="!formSubmitVideo.valid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit Video
+          </button>
+        </div>
       </form>
     </div>
-  </div>
+    <div class="col-12 col-md-3">
+      <div class="mb-3">
+        <strong>Preview do Vídeo</strong>
+      </div>
+      <div *ngIf="newVideoPreview; else noVideoSelected">
+        <app-video-item
+          [video]="newVideoPreview"
+          [hasLink]="false"
+          [hasStatus]="false"
+        ></app-video-item>
+      </div>
 
-  <div class="mt-4 mb-3">
-    <app-acronym value="2" [hide]="true"></app-acronym> Set up languages
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <p class="page-description mb-3 text-muted">
-        Aqui tem uma descrição do que o formulário faz.
-      </p>
-      Current available languages
+      <ng-template #noVideoSelected>
+        Informe a URL de um vídeo para pré-visualizar
+      </ng-template>
     </div>
-  </div>
-
-  <div class="mt-4 mb-3">
-    <app-acronym value="3" [hide]="true"></app-acronym> Fetch Youtube auto-generated captions <span class="text-muted">(optional)</span>
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <p class="page-description mb-3 text-muted">
-        Aqui tem uma descrição do que o formulário faz.
-      </p>
-
-      <button type="button" class="btn btn-danger">
-        <i class="fab fa-youtube mr-2"></i> Connect to Youtube
-      </button>
-
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <button
-      [disabled]="!formSubmitVideo.valid"
-      type="submit"
-      class="btn btn-primary"
-    >
-      Submit Video
-    </button>
   </div>
 </div>

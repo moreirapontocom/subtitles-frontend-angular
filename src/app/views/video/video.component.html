@@ -10,15 +10,18 @@
       Here comes the specific video to be captionized.
     </p>
 
-    <div *ngIf="isConsultant" class="row mb-5">
+    <div *ngIf="helpers.isConsultant()" class="row mb-5">
       <div class="col-12 col-md-4">
         <div class="card card-body">
           <div class="row align-items-center">
-            <div class="col">
+            <div *ngIf="video.consultant_id === null" class="col">
               <button (click)="startCaptions()" class="btn btn-secondary me-3" [disabled]="video.consultant_id !== null">{{ (video.consultant_id === null) ? 'Start Captions' : 'Captured' }}</button>
             </div>
             <div *ngIf="video.consultant_id !== null" class="col text-end">
               <app-acronym [value]="user | fullName" color="#0099CC" fgColor="#FFFFFF"></app-acronym>
+              <small class="text-muted">
+                Consultant
+              </small>
             </div>
           </div>
         </div>
@@ -89,7 +92,7 @@
                       name="status"
                       class="form-select"
                     >
-                      <option *ngFor="let status of helpers.availableJobStatus" [disabled]="['0created','1not_started'].includes(status.id) && isConsultant" [value]="status.id">
+                      <option *ngFor="let status of helpers.availableJobStatus" [disabled]="['0created','1not_started'].includes(status.id) && helpers.isConsultant()" [value]="status.id">
                         {{ status.label }}
                       </option>
                     </select>
@@ -111,6 +114,11 @@
         </span>
 
         <ng-template #captionsText>
+          <div class="mb-3">
+            <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
+              {{ video.status | jobStatus: "label" }}
+            </div>
+          </div>
           {{ video.subtitles || 'Nenhuma legenda adicionada ainda' }}
         </ng-template>
       </div>

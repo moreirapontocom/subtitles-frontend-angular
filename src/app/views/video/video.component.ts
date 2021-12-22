@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HelpersService } from 'src/app/helpers/helpers';
 import { AuthService } from 'src/app/services/auth.service';
+import { MessageService } from 'src/app/services/message.service';
 import { VideoService } from 'src/app/services/video.service';
 
 @Component({
@@ -15,7 +16,6 @@ export class VideoComponent implements OnInit {
   timer: any;
   isVideoPlaying: boolean = false;
   pauseWhileTyping: boolean = true;
-  isConsultant: boolean = true;
   @ViewChild('player') player: any;
 
   constructor(
@@ -24,6 +24,7 @@ export class VideoComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     public readonly helpers: HelpersService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -93,6 +94,7 @@ export class VideoComponent implements OnInit {
         if (formData.status === '4published') {
           this.publishCaptionToYoutube();
         }
+        this.messageService.toast('Atualizado');
       });
   };
 
@@ -130,12 +132,13 @@ export class VideoComponent implements OnInit {
 
   deleteVideo = () => {
     this.videoService.deleteVideo(this.video.id).subscribe((response: any) => {
+      this.messageService.toast('Vídeo removido');
       this.router.navigate(['/videos']);
     });
   };
 
-  redirectToYoutubeCaptionsFetch = () => {
-    localStorage.setItem('videoIDs', JSON.stringify({ videoId: this.video.id, youtubeVideoId: this.video.video_id }));
-    this.router.navigate(['/videos/caption-request']);
-  };
+  // redirectToYoutubeCaptionsFetch = () => {
+  //   localStorage.setItem('videoIDs', JSON.stringify({ videoId: this.video.id, youtubeVideoId: this.video.video_id }));
+  //   this.router.navigate(['/videos/caption-request']);
+  // };
 }

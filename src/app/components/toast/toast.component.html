@@ -1,0 +1,5 @@
+<div class="my-toast">
+  <ul>
+    <li class="cursor-pointer" *ngFor="let item of messages; let i = index" (click)="closeThis(i)">{{ item }}</li>
+  </ul>
+</div>
