@@ -27,6 +27,7 @@ import { HelpersService } from './helpers/helpers';
 import { VideoItemComponent } from './components/video-item/video-item.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { MessageService } from './services/message.service';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MessageService } from './services/message.service';
     ComposeUserFullNamePipe,
     VideoItemComponent,
     ToastComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

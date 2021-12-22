@@ -33,10 +33,13 @@
                 />
                 <button
                   (click)="getVideoPreview(importGroup.value.url)"
-                  [disabled]="!importGroup.valid"
+                  [disabled]="!importGroup.valid || loadingPreview"
                   type="button"
                   class="btn btn-primary"
                 >
+                  <app-loading [loading]="loadingPreview" type="button">
+                    <i class="fas fa-video me-2"></i>
+                  </app-loading>
                   Get Preview
                 </button>
               </div>
@@ -126,7 +129,8 @@
             type="submit"
             class="btn btn-primary"
           >
-            Submit Video
+            <app-loading [loading]="loading" type="button"></app-loading>
+            <i class="fas fa-check-circle me-2"></i> Submit Video
           </button>
         </div>
       </form>
@@ -145,6 +149,7 @@
 
       <ng-template #noVideoSelected>
         Informe a URL de um vídeo para pré-visualizar
+        <app-loading [loading]="loadingPreview"></app-loading>
       </ng-template>
     </div>
   </div>

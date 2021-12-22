@@ -1,0 +1,11 @@
+<div *ngIf="type=='button'" class="text-center">
+  <i *ngIf="loading" class="fas fa-circle-notch fa-spin" [ngClass]="color"></i>
+  <ng-content *ngIf="!loading"></ng-content>
+</div>
+
+<div *ngIf="loading && type=='page'" class="text-center text-primary mt-5 mb-5">
+  <!-- SPINNER -->
+  <div class="container page">
+    <i class="fas fa-circle-notch text-primary fa-spin fa-3x"></i>
+  </div>
+</div>

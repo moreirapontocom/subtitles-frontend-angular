@@ -10,6 +10,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  loading: boolean = false;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -33,9 +35,13 @@ export class LoginComponent implements OnInit {
   };
 
   login = (form: any) => {
+    this.loading = true;
     this.authService.login(form).subscribe((response: any) => {
+      this.loading = false;
       this.getUserProfile(response);
     }, err => {
+      this.loading = false;
+      this.messageService.toast('Ocorreu um erro ao efetuar o login.');
       console.log('Error login() >> ', err);
     });
   };

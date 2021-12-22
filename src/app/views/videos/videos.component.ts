@@ -8,6 +8,7 @@ import { VideoService } from 'src/app/services/video.service';
   styleUrls: ['./videos.component.scss'],
 })
 export class VideosComponent implements OnInit {
+  loading: boolean = false;
   videos: Array<any> = [];
   videosImutable: Array<any> = [];
   filterStatus: string = 'all';
@@ -22,9 +23,11 @@ export class VideosComponent implements OnInit {
   }
 
   private getVideos = () => {
+    this.loading = true;
     this.videoService.getVideos().subscribe((response: any) => {
       this.videos = response.data;
       this.videosImutable = response.data;
+      this.loading = false;
     });
   };
 

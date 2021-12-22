@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HelpersService } from 'src/app/helpers/helpers';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -13,6 +13,8 @@ import { YoutubeService } from 'src/app/services/youtube.service';
 })
 export class SubmitVideoComponent implements OnInit {
   user: any;
+  loading: boolean = false;
+  loadingPreview: boolean = false;
   newVideoPreview: any = undefined;
   youtubeAccessToken: string = "";
   youtubeCaption: string = "";
@@ -22,7 +24,6 @@ export class SubmitVideoComponent implements OnInit {
     private youtubeService: YoutubeService,
     private readonly authService: AuthService,
     private readonly helpers: HelpersService,
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     private messageService: MessageService,
   ) {}
@@ -38,6 +39,7 @@ export class SubmitVideoComponent implements OnInit {
   }
 
   getVideoPreview = async (videoUrl: string) => {
+    this.loadingPreview = true;
     const youtube = await this.youtubeService
       .getVideoSnippetFromYoutubeVideoUrl(videoUrl)
       .then((r) => r);
@@ -50,9 +52,11 @@ export class SubmitVideoComponent implements OnInit {
         channel_id: youtube.snippet.channelId,
         channel_title: youtube.snippet.channelTitle,
       };
+      this.loadingPreview = false;
   }
 
   submitVideo = async (formData: any) => {
+    this.loading = true;
     const data = {
       owner: this.user.id,
       cover: this.newVideoPreview.cover,
@@ -68,6 +72,7 @@ export class SubmitVideoComponent implements OnInit {
     this.newVideoPreview = data;
 
     this.videoService.createVideo(data).subscribe((response: any) => {
+      this.loading = false;
       this.messageService.toast('Vídeo enviado com sucesso!');
       this.router.navigate(['/videos', response.data.id]);
     });

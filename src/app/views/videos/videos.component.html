@@ -4,7 +4,7 @@
 
   <div class="row videos-filter mb-4">
     <div class="col-12 col-md-3">
-      <select (change)="filterJobsByStatus()" [(ngModel)]="filterStatus" title="Filter job status" class="form-select">
+      <select [disabled]="loading || !videos.length" (change)="filterJobsByStatus()" [(ngModel)]="filterStatus" title="Filter job status" class="form-select">
         <option value="all">All status</option>
         <option *ngFor="let status of helpers.availableJobStatus" [value]="status.id">
           {{ status.label }}
@@ -13,7 +13,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <app-loading [loading]="loading"></app-loading>
+
+  <div *ngIf="!loading && videos.length" class="row">
     <div *ngFor="let video of videos" trackBy="video.id" class="col col-3 mb-5">
       <app-video-item [video]="video" [hasLink]="true" [hasStatus]="true"></app-video-item>
     </div>
