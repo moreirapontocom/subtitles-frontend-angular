@@ -14,6 +14,7 @@ export class VideoComponent implements OnInit {
   user: any;
   video: any;
   timer: any;
+  loading: boolean = false;
   isVideoPlaying: boolean = false;
   pauseWhileTyping: boolean = true;
   @ViewChild('player') player: any;
@@ -88,12 +89,14 @@ export class VideoComponent implements OnInit {
   }
 
   save = (formData: any) => {
+    this.loading = true;
     this.videoService
       .updateVideo(this.video.id, formData)
       .subscribe(() => {
         if (formData.status === '4published') {
           this.publishCaptionToYoutube();
         }
+        this.loading = false;
         this.messageService.toast('Atualizado');
       });
   };
