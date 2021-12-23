@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>Submit new video</h1>
-  <p class="page-description">Submit a new video to be captionized.</p>
+  <h1>Enviar um novo vídeo</h1>
+  <p class="page-description">Envie um novo vídeo para o nosso time de legendadores profissionais.</p>
 
   <div class="row">
     <div class="col-12 col-md-9">
@@ -16,7 +16,7 @@
               value="1"
               [hide]="true"
             ></app-acronym>
-            Enter the video URL <span class="text-danger">*</span>
+            Informe a URL completa do vídeo <span class="text-danger">*</span>
           </div>
 
           <div class="card ms-3 mb-5">
@@ -40,7 +40,7 @@
                   <app-loading [loading]="loadingPreview" type="button">
                     <i class="fas fa-video me-2"></i>
                   </app-loading>
-                  Get Preview
+                  Pré-visualizar
                 </button>
               </div>
             </div>
@@ -54,7 +54,7 @@
               value="2"
               [hide]="true"
             ></app-acronym>
-            Set up languages <span class="text-danger">*</span>
+            Seleção dos idiomas <span class="text-danger">*</span>
           </div>
 
           <div class="card ms-3 mb-5">
@@ -98,8 +98,8 @@
             value="3"
             [hide]="true"
           ></app-acronym>
-          Fetch Youtube auto-generated captions
-          <span class="text-muted">(optional)</span>
+          Obter as legendas geradas automaticamente pelo Youtube
+          <span class="text-muted">(disponível em breve)</span>
         </div>
 
         <div class="card ms-3 mb-5">
@@ -116,7 +116,7 @@
                   type="button"
                   class="btn btn-danger float-end"
                 >
-                  <i class="fab fa-youtube mr-2"></i> Connect to Youtube
+                  <i class="fab fa-youtube mr-2"></i> Conectar ao Youtube
                 </button>
               </div>
             </div>
@@ -132,14 +132,14 @@
             <app-loading [loading]="loading" type="button">
               <i class="fas fa-check-circle me-2"></i>
             </app-loading>
-             Submit Video
+             Enviar Vídeo
           </button>
         </div>
       </form>
     </div>
     <div class="col-12 col-md-3">
       <div class="mb-3">
-        <strong>Preview do Vídeo</strong>
+        <strong>Pré-visualização do Vídeo</strong>
       </div>
       <div *ngIf="newVideoPreview; else noVideoSelected">
         <app-video-item

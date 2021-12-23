@@ -19,27 +19,28 @@ export class HelpersService {
     availableJobStatus: Array<{ id: string, label: string, style: string }> = [
         {
             id: '0created',
-            label: 'Missing Setup',
+            label: 'Aguardando Captura',
             style: 'bg-warning text-dark'
         },
         {
             id: '1not_started',
-            label: 'To Do',
+            label: 'Capturado',
             style: 'bg-secondary'
         },
         {
             id: '2in_progress',
-            label: 'In Progress',
+            label: 'Em Andamento',
             style: 'bg-primary'
         },
         {
             id: '3completed',
-            label: 'Complete',
+            label: 'Completo',
             style: 'bg-success'
         },
+        // Faltam outros: aprovado, mudanças solicitadas pelo cliente
         {
             id: '4published',
-            label: 'Published',
+            label: 'Publicado',
             style: 'bg-danger'
         }
     ];

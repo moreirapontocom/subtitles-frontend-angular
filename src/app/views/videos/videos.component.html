@@ -1,11 +1,13 @@
 <div class="container videos-list">
-  <h1>Videos</h1>
-  <p class="page-description">Here comes your videos to be captionized.</p>
+  <h1>Vídeos</h1>
+  <p class="page-description">
+    Aqui estão os vídeos que você enviou para o nosso time fazer as legendas.
+  </p>
 
   <div class="row videos-filter mb-4">
     <div class="col-12 col-md-3">
-      <select [disabled]="loading || !videos.length" (change)="filterJobsByStatus()" [(ngModel)]="filterStatus" title="Filter job status" class="form-select">
-        <option value="all">All status</option>
+      <select [disabled]="loading" (change)="filterJobsByStatus()" [(ngModel)]="filterStatus" title="Filter job status" class="form-select">
+        <option value="all">Todos os status</option>
         <option *ngFor="let status of helpers.availableJobStatus" [value]="status.id">
           {{ status.label }}
         </option>

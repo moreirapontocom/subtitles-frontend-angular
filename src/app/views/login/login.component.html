@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="row">
+  <div class="row align-items-center">
     <div class="col-12 col-md-4 offset-md-4">
-      <h1>Login</h1>
-      <p class="page-description">Please enter your credentials to login.</p>
+      <h1>Entrar</h1>
+      <p class="page-description">Informe seus dados de acesso para entrar na plataforma.</p>
       <div class="card card-body">
         <form #formLogin="ngForm" (submit)="login(formLogin.value)" novalidate>
           <div class="mb-2">
@@ -18,7 +18,7 @@
             />
           </div>
           <div class="mb-2">
-            <label>Password</label>
+            <label>Senha</label>
             <input
               type="password"
               ngModel
@@ -35,7 +35,7 @@
               class="btn btn-primary"
             >
               <app-loading [loading]="loading" type="button"></app-loading>
-              Login
+              Entrar
             </button>
           </div>
         </form>
