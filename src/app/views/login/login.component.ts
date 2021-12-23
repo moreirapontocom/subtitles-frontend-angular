@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         const user = { ...authData.data, ...response.data };
         this.authService.setUser(user);
         this.messageService.sendMessage('NavbarComponent', 'login', user);
+        this.messageService.sendMessage('AppComponent', 'auto-refresh');
         this.router.navigate(['/videos']);
       }, err => {
         console.log('Error getUserProfile() >> ', err);

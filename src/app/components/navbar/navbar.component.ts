@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
   logout = (): void => {
     this.user = null;
     this.authService.removeUser();
+    this.messageService.sendMessage('AppComponent', 'clear-auto-refresh');
     this.router.navigate(['/login']);
   };
 }

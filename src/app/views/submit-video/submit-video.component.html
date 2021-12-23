@@ -21,7 +21,7 @@
 
           <div class="card ms-3 mb-5">
             <div class="card-body">
-              <div class="input-group mb-2">
+              <div class="input-group">
                 <input
                   (blur)="getVideoPreview(importGroup.value.url)"
                   ngModel
@@ -106,15 +106,15 @@
           <div class="card-body">
             <div class="row">
               <div class="col-12 col-md-8">
-                <p class="page-description mb-3 text-muted">
-                  Aqui tem uma descrição do que o formulário faz.
+                <p class="page-description mb-0 text-muted">
+                  Esta opção tenta buscar as legendas geradas automaticamente pelo Youtube, caso estejam disponíveis.
                 </p>
               </div>
-              <div class="col-12 col-md-4 d-flex">
+              <div class="col-12 col-md-4">
                 <button
                   disabled
                   type="button"
-                  class="btn btn-danger ms-auto"
+                  class="btn btn-danger float-end"
                 >
                   <i class="fab fa-youtube mr-2"></i> Connect to Youtube
                 </button>
