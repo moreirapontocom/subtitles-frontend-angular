@@ -45,6 +45,16 @@ export class HelpersService {
         }
     ];
 
+    copyToClipboard = (text: string) => {
+        const create_copy = (e: any) => {
+            e.clipboardData.setData('text/plain', text);
+            e.preventDefault();
+        }
+        document.addEventListener('copy', create_copy);
+        document.execCommand('copy');
+        document.removeEventListener('copy', create_copy);
+    }
+
     isConsultant = (): boolean => {
         const user = this.authService.getUser();
         return (user.role === environment.roles.consultant) ? true : false;
