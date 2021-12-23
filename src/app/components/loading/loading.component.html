@@ -1,7 +1,7 @@
-<div *ngIf="context=='button'" class="text-center">
+<span *ngIf="context=='button'">
   <i *ngIf="loading" class="fas fa-circle-notch fa-spin" [ngClass]="color"></i>
   <ng-content *ngIf="!loading"></ng-content>
-</div>
+</span>
 
 <div *ngIf="loading && context=='page'" class="text-center text-primary mt-5 mb-5">
   <!-- SPINNER -->
