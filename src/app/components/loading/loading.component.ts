@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LoadingComponent implements OnInit {
 
   @Input() loading: boolean = false;
-  @Input() type: string = 'page'; // or 'button'
+  @Input() context: string = 'page'; // or 'button'
   @Input() color: string = 'text-white';
 
   constructor() { }
