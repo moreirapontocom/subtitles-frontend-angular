@@ -41,30 +41,10 @@
           >
           </youtube-player>
         </div>
-        <div *ngIf="canConsultantUpdateVideo()" class="row mt-2 align-items-center">
-          <div class="col-3">
-            <button
-              *ngIf="!isVideoPlaying"
-              (click)="playVideo()"
-              type="button"
-              class="btn btn-secondary me-2"
-            >
-              <i class="fas fa-play me-1"></i> Play
-            </button>
-            <button
-              *ngIf="isVideoPlaying"
-              (click)="pauseVideo()"
-              type="button"
-              class="btn btn-secondary"
-            >
-              <i class="fas fa-pause me-1"></i> Pause
-            </button>
-          </div>
-          <div class="col-9 text-end text-muted">
-            <label>
-              <input [ngModel]="pauseWhileTyping" name="pauseWhileTyping" (change)="pauseWhileTyping = !pauseWhileTyping" [disabled]="video.consultant_id === null" type="checkbox" title="Pause video while typing"> Pause while typing
-            </label>
-          </div>
+        <div *ngIf="canConsultantUpdateVideo()" class="mt-2 text-end text-muted">
+          <label>
+            <input [ngModel]="pauseWhileTyping" name="pauseWhileTyping" (change)="pauseWhileTyping = !pauseWhileTyping" [disabled]="video.consultant_id === null" type="checkbox" title="Pause video while typing"> Pause while typing
+          </label>
         </div>
       </div>
       <div class="col col-6">
