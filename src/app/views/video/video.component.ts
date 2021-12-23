@@ -65,6 +65,11 @@ export class VideoComponent implements OnInit {
     }, 700);
   }
 
+  copyToClipboard = (text: string) => {
+    this.helpers.copyToClipboard(text);
+    this.messageService.toast('Copiado para a Área de Transferência');
+  }
+
   private getCurrentRoute(): void {
     this.activatedRoute.params.subscribe((params: any) => {
       this.getVideo(params.id);
@@ -82,27 +87,9 @@ export class VideoComponent implements OnInit {
     return (this.helpers.isConsultant() && this.user.id === this.video.consultant_id) ? true : false;
   }
 
-  startCaptions = () => {
-    this.videoService.captureVideo(this.video.id, this.user.id).subscribe((response: any) => {
-      this.video.consultant_id = this.user.id;
-    });
-  }
-
-  save = (formData: any) => {
-    this.loading = true;
-    this.videoService
-      .updateVideo(this.video.id, formData)
-      .subscribe(() => {
-        if (formData.status === '4published') {
-          this.publishCaptionToYoutube();
-        }
-        this.loading = false;
-        this.messageService.toast('Atualizado');
-      });
-  };
-
-  private publishCaptionToYoutube = () => {
-    console.log('Manda pro Youtube');
+  publishTo = (service: string = 'youtube') => {
+    this.video.status = '4published';
+    this.save({ status: '4published' });
 
     /*
     const youtubeAccessToken = localStorage.getItem('youtubeAccessToken');
@@ -132,6 +119,27 @@ export class VideoComponent implements OnInit {
     }
     */
   }
+
+  startCaptions = () => {
+    this.videoService.captureVideo(this.video.id, this.user.id).subscribe((response: any) => {
+      this.video.consultant_id = this.user.id;
+    });
+  }
+
+  save = (formData: any) => {
+    if (this.helpers.isConsultant() && formData.status === '4published') {
+      this.messageService.toast('Você não pode salvar um vídeo no status selecionado');
+      return;
+    }
+
+    this.loading = true;
+    this.videoService
+      .updateVideo(this.video.id, formData)
+      .subscribe(() => {
+        this.loading = false;
+        this.messageService.toast('Atualizado');
+      });
+  };
 
   deleteVideo = () => {
     this.videoService.deleteVideo(this.video.id).subscribe((response: any) => {

@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="col col-6">
-        <span *ngIf="canConsultantUpdateVideo(); else captionsText">
+        <span *ngIf="canConsultantUpdateVideo()">
           <form #formSubtitle="ngForm" novalidate>
             <textarea
               [ngModel]="video.subtitles"
@@ -72,7 +72,7 @@
                       name="status"
                       class="form-select"
                     >
-                      <option *ngFor="let status of helpers.availableJobStatus" [disabled]="['0created','1not_started'].includes(status.id) && helpers.isConsultant()" [value]="status.id">
+                      <option *ngFor="let status of helpers.availableJobStatus" [disabled]="['0created','1not_started','4published'].includes(status.id) && helpers.isConsultant()" [value]="status.id">
                         {{ status.label }}
                       </option>
                     </select>
@@ -94,14 +94,40 @@
           </form>
         </span>
 
-        <ng-template #captionsText>
+        <div *ngIf="!helpers.isConsultant()">
+          <div *ngIf="['3completed','4published'].includes(video.status)">
+            <div class="card card-body shadow mb-5">
+              <span *ngIf="video.status === '3completed'">
+                Esta legenda foi marcada com o status "<strong>{{ video.status | jobStatus: "label" }}</strong>".
+              </span>
+              <span *ngIf="video.status === '4published'">
+                Esta legenda foi publicada no Youtube.
+              </span>
+              <div *ngIf="video.status === '3completed'">
+                <hr class="mt-3">
+                <div class="row mt-2">
+                  <div class="col-12 col-md-5">
+                    <button (click)="publishTo('youtube')" type="button" class="btn btn-danger">
+                      <i class="fab fa-youtube mr-2"></i> Publicar no Youtube
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-7">
+                    A publicação automática no Youtube ainda não está disponível. Para publicar manualmente, <button (click)="copyToClipboard(video.subtitles)" class="btn btn-link btn-link-inline" type="button">copie e cole</button> toda a legenda fornecida na edição do vídeo, no painel do Youtube.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!canConsultantUpdateVideo()">
           <div class="mb-3">
             <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
               {{ video.status | jobStatus: "label" }}
             </div>
           </div>
           <div [innerHtml]="video.subtitles || 'Nenhuma legenda adicionada ainda'" class="keep-line-breaks"></div>
-        </ng-template>
+        </div>
       </div>
     </div>
 
