@@ -18,7 +18,7 @@
   <app-loading [loading]="loading"></app-loading>
 
   <div *ngIf="!loading && videos.length" class="row">
-    <div *ngFor="let video of videos" trackBy="video.id" class="col col-3 mb-5">
+    <div *ngFor="let video of videos" trackBy="video.id" class="col-12 col-md-3 mb-5">
       <app-video-item [video]="video" [hasLink]="true" [hasStatus]="true"></app-video-item>
     </div>
   </div>
