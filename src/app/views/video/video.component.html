@@ -1,149 +1,149 @@
-<ng-container *ngIf="video">
-  <div class="container">
-    <div class="mb-3">
-      <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
-        {{ video.status | jobStatus: "label" }}
-      </div>
-    </div>
-    <h1>{{ video.title }}</h1>
-    <p class="page-description">
-      Detalhes do vídeo.
-    </p>
+<app-loading [loading]="loading"></app-loading>
 
-    <div *ngIf="helpers.isConsultant()" class="row mb-5">
-      <div class="col-12 col-md-4">
-        <div class="card card-body">
-          <div class="row align-items-center mt-2">
-            <div *ngIf="video.consultant_id === null" class="col">
-              <button (click)="startCaptions()" class="btn btn-secondary me-3" [disabled]="video.consultant_id !== null">{{ (video.consultant_id === null) ? 'Iniciar Legenda' : 'Iniciado' }}</button>
-            </div>
-            <div *ngIf="video.consultant_id !== null" class="col text-end">
-              <app-acronym [value]="user | fullName" color="#0099CC" fgColor="#FFFFFF"></app-acronym>
-              <small class="text-muted">
-                Consultor
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-block d-md-none">
-      Este recurso está não disponível para dispositivos móveis.
-    </div>
-
-    <div class="row d-none d-md-flex">
-      <div class="col-12 col-md-6">
-        <div class="video-placeholder">
-          <youtube-player
-            #player
-            [videoId]="video.video_id"
-            [playerVars]="{ controls: 1 }"
-            suggestedQuality="highres"
-            [height]="365"
-            [width]="648"
-          >
-          </youtube-player>
-        </div>
-        <div *ngIf="canConsultantUpdateVideo()" class="mt-2 text-end text-muted">
-          <label>
-            <input [ngModel]="pauseWhileTyping" name="pauseWhileTyping" (change)="pauseWhileTyping = !pauseWhileTyping" [disabled]="video.consultant_id === null" type="checkbox" title="Pause video while typing"> Pause while typing
-          </label>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <span *ngIf="canConsultantUpdateVideo()">
-          <form #formSubtitle="ngForm" novalidate>
-            <textarea
-              [ngModel]="video.subtitles"
-              (keyup)="isTyping()"
-              [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
-              name="subtitles"
-              cols=""
-              rows="14"
-              class="form-control"
-              required
-              placeholder="Escreva a legenda aqui"
-            ></textarea>
-            <div class="mt-2">
-              <div class="row">
-                <div class="col-4 offset-md-5">
-                  <div class="form-group">
-                    <select
-                      [ngModel]="video.status"
-                      [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
-                      title="Job status"
-                      name="status"
-                      class="form-select"
-                    >
-                      <option *ngFor="let status of helpers.availableJobStatus" [disabled]="['0created','1not_started','4published'].includes(status.id) && helpers.isConsultant()" [value]="status.id">
-                        {{ status.label }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-3 d-grid">
-                  <button
-                    (click)="save(formSubtitle.value)"
-                    [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
-                    type="button"
-                    class="btn btn-primary"
-                  >
-                    <app-loading [loading]="loading" context="button"></app-loading>
-                    Salvar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </span>
-
-        <div *ngIf="!helpers.isConsultant()">
-          <div *ngIf="['3completed','4published'].includes(video.status)">
-            <div class="card card-body shadow mb-5">
-              <span *ngIf="video.status === '3completed'">
-                Esta legenda foi marcada com o status "<strong>{{ video.status | jobStatus: "label" }}</strong>".
-              </span>
-              <span *ngIf="video.status === '4published'">
-                Esta legenda foi publicada no Youtube.
-              </span>
-              <div *ngIf="video.status === '3completed'">
-                <hr class="mt-3">
-                <div class="row mt-2">
-                  <div class="col-12 col-md-5">
-                    <button (click)="publishTo('youtube')" type="button" class="btn btn-danger">
-                      <i class="fab fa-youtube mr-2"></i> Publicar no Youtube
-                    </button>
-                  </div>
-                  <div class="col-12 col-md-7">
-                    A publicação automática no Youtube ainda não está disponível. Para publicar manualmente, <button (click)="copyToClipboard(video.subtitles)" class="btn btn-link btn-link-inline" type="button">copie e cole</button> toda a legenda fornecida na edição do vídeo, no painel do Youtube.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div *ngIf="!canConsultantUpdateVideo()">
-          <div class="mb-3">
-            <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
-              {{ video.status | jobStatus: "label" }}
-            </div>
-          </div>
-          <div [innerHtml]="video.subtitles || 'Nenhuma legenda adicionada ainda'" class="keep-line-breaks"></div>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="video.consultant_id === null && !helpers.isConsultant()" class="mt-3">
-      <button
-        (click)="deleteVideo()"
-        [disabled]="video.consultant_id !== null || !['0created','1not_started'].includes(video.status)"
-        type="button"
-        class="btn btn-outline-danger"
-      >
-        <i class="fas fa-trash mr-2"></i> Remover video
-      </button>
+<div *ngIf="video" class="container">
+  <div class="mb-3">
+    <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
+      {{ video.status | jobStatus: "label" }}
     </div>
   </div>
-</ng-container>
+  <h1>{{ video.title }}</h1>
+  <p class="page-description">
+    Detalhes do vídeo.
+  </p>
+
+  <div *ngIf="helpers.isConsultant()" class="row mb-5">
+    <div class="col-12 col-md-4">
+      <div class="card card-body">
+        <div class="row align-items-center mt-2">
+          <div *ngIf="video.consultant_id === null" class="col">
+            <button (click)="startCaptions()" class="btn btn-secondary me-3" [disabled]="video.consultant_id !== null">{{ (video.consultant_id === null) ? 'Iniciar Legenda' : 'Iniciado' }}</button>
+          </div>
+          <div *ngIf="video.consultant_id !== null" class="col text-end">
+            <app-acronym [value]="user | fullName" color="#0099CC" fgColor="#FFFFFF"></app-acronym>
+            <small class="text-muted">
+              Consultor
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-block d-md-none">
+    Este recurso está não disponível para dispositivos móveis.
+  </div>
+
+  <div class="row d-none d-md-flex">
+    <div class="col-12 col-md-6">
+      <div class="video-placeholder">
+        <youtube-player
+          #player
+          [videoId]="video.video_id"
+          [playerVars]="{ controls: 1 }"
+          suggestedQuality="highres"
+          [height]="365"
+          [width]="648"
+        >
+        </youtube-player>
+      </div>
+      <div *ngIf="canConsultantUpdateVideo()" class="mt-2 text-end text-muted">
+        <label>
+          <input [ngModel]="pauseWhileTyping" name="pauseWhileTyping" (change)="pauseWhileTyping = !pauseWhileTyping" [disabled]="video.consultant_id === null" type="checkbox" title="Pause video while typing"> Pause while typing
+        </label>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <span *ngIf="canConsultantUpdateVideo()">
+        <form #formSubtitle="ngForm" novalidate>
+          <textarea
+            [ngModel]="video.subtitles"
+            (keyup)="isTyping()"
+            [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
+            name="subtitles"
+            cols=""
+            rows="14"
+            class="form-control"
+            required
+            placeholder="Escreva a legenda aqui"
+          ></textarea>
+          <div class="mt-2">
+            <div class="row">
+              <div class="col-4 offset-md-5">
+                <div class="form-group">
+                  <select
+                    [ngModel]="video.status"
+                    [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
+                    title="Job status"
+                    name="status"
+                    class="form-select"
+                  >
+                    <option *ngFor="let status of helpers.availableJobStatus" [disabled]="['0created','1not_started','4published'].includes(status.id) && helpers.isConsultant()" [value]="status.id">
+                      {{ status.label }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3 d-grid">
+                <button
+                  (click)="save(formSubtitle.value)"
+                  [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  <app-loading [loading]="loading" context="button"></app-loading>
+                  Salvar
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </span>
+
+      <div *ngIf="!helpers.isConsultant()">
+        <div *ngIf="['3completed','4published'].includes(video.status)">
+          <div class="card card-body shadow mb-5">
+            <span *ngIf="video.status === '3completed'">
+              Esta legenda foi marcada com o status "<strong>{{ video.status | jobStatus: "label" }}</strong>".
+            </span>
+            <span *ngIf="video.status === '4published'">
+              Esta legenda foi publicada no Youtube.
+            </span>
+            <div *ngIf="video.status === '3completed'">
+              <hr class="mt-3">
+              <div class="row mt-2">
+                <div class="col-12 col-md-5">
+                  <button (click)="publishTo('youtube')" type="button" class="btn btn-danger">
+                    <i class="fab fa-youtube mr-2"></i> Publicar no Youtube
+                  </button>
+                </div>
+                <div class="col-12 col-md-7">
+                  A publicação automática no Youtube ainda não está disponível. Para publicar manualmente, <button (click)="copyToClipboard(video.subtitles)" class="btn btn-link btn-link-inline" type="button">copie e cole</button> toda a legenda fornecida na edição do vídeo, no painel do Youtube.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!canConsultantUpdateVideo()">
+        <div class="mb-3">
+          <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
+            {{ video.status | jobStatus: "label" }}
+          </div>
+        </div>
+        <div [innerHtml]="video.subtitles || 'Nenhuma legenda adicionada ainda'" class="keep-line-breaks"></div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="video.consultant_id === null && !helpers.isConsultant()" class="mt-3">
+    <button
+      (click)="deleteVideo()"
+      [disabled]="video.consultant_id !== null || !['0created','1not_started'].includes(video.status)"
+      type="button"
+      class="btn btn-outline-danger"
+    >
+      <i class="fas fa-trash mr-2"></i> Remover video
+    </button>
+  </div>
+</div>

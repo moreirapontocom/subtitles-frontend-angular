@@ -77,9 +77,11 @@ export class VideoComponent implements OnInit {
   }
 
   getVideo = (videoId: number): void => {
+    this.loading = true;
     this.videoService.getVideoById(videoId).subscribe((response: any) => {
       this.video = response.data;
       this.canConsultantUpdateVideo();
+      this.loading = false;
     });
   };
 

@@ -11,6 +11,7 @@ export const ROUTES = [
   { path: 'panel',
     canActivate: [LoggedInGuard],
     children: [
+      { path: '', redirectTo: 'videos', pathMatch: 'full' },
       { path: 'videos', component: VideosComponent },
       { path: 'videos/caption-request', component: YoutubeCaptionFetchComponent },
       { path: 'videos/:id', component: VideoComponent },
