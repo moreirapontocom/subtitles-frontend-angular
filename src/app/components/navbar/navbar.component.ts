@@ -38,6 +38,6 @@ export class NavbarComponent implements OnInit {
     this.user = null;
     this.authService.removeUser();
     this.messageService.sendMessage('AppComponent', 'clear-auto-refresh');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   };
 }

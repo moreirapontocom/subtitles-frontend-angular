@@ -34,7 +34,7 @@
         </li>
         <li *ngIf="user" class="nav-item">
           <a
-            [routerLink]="['/videos']"
+            [routerLink]="['/panel/videos']"
             routerLinkActive="active"
             class="nav-link"
             aria-current="page"
@@ -43,7 +43,7 @@
         </li>
         <li *ngIf="user && !helpers.isConsultant()" class="nav-item">
           <a
-            [routerLink]="['/submit-video']"
+            [routerLink]="['/panel/submit-video']"
             routerLinkActive="active"
             class="nav-link"
             aria-current="page"

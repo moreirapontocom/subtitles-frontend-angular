@@ -28,6 +28,7 @@ import { VideoItemComponent } from './components/video-item/video-item.component
 import { ToastComponent } from './components/toast/toast.component';
 import { MessageService } from './services/message.service';
 import { LoadingComponent } from './components/loading/loading.component';
+import { LoggedInGuard } from './services/loggedin.guard';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     YoutubeService,
     HelpersService,
     MessageService,
+    LoggedInGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

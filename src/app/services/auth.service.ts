@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   autoRefreshUserSession = (clearRefreshInterval: boolean = false) => {
-    const expirationLimit = this.getUser().expires / 2;
+    const expirationLimit = this.getUser()?.expires / 2 || 3000;
     console.log(`Start auto-refresh timer to ${expirationLimit} ms`);
 
     if (clearRefreshInterval) {

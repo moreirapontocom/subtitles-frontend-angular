@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         this.authService.setUser(user);
         this.messageService.sendMessage('NavbarComponent', 'login', user);
         this.messageService.sendMessage('AppComponent', 'auto-refresh');
-        this.router.navigate(['/videos']);
+        this.router.navigate(['/panel/videos']);
       }, err => {
         console.log('Error getUserProfile() >> ', err);
       });
