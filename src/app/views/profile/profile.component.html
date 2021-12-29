@@ -1,0 +1,49 @@
+<div class="container">
+    <h1>Perfil</h1>
+    <p class="page-description">Suas informações pessoais</p>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <form #formProfile="ngForm" (submit)="updateUserProfile(formProfile.value)" novalidate>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Nome <span class="text-danger">*</span></label>
+                            <input
+                                [ngModel]="user.first_name"
+                                name="first_name"
+                                required
+                                autocomplete="off"
+                                class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Sobrenome</label>
+                            <input
+                                [ngModel]="user.last_name"
+                                name="last_name"
+                                autocomplete="off"
+                                class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                    <input
+                        [ngModel]="user.email"
+                        name="email"
+                        required
+                        readonly
+                        autocomplete="off"
+                        class="form-control disabled" />
+                </div>
+                <button [disabled]="!formProfile.valid" type="submit" class="btn btn-primary">
+                    <app-loading [loading]="loading" context="button"></app-loading>
+                    Atualizar Perfil
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -16,4 +16,11 @@ export class UserService {
       },
     });
   };
+
+  updateUserProfile = (data: any): Observable<any> => {
+    const id = data.id;
+    delete data.id;
+    delete data.email;
+    return this.http.patch<string>(`${environment.api}/users/${id}`, data);
+  }
 }

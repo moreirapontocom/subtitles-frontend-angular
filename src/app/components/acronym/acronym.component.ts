@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-acronym',
@@ -12,10 +13,20 @@ export class AcronymComponent implements OnInit {
   @Input() value: string = '';
   @Input() hide: boolean = false;
 
-  constructor() {}
+  constructor(
+    private messageService: MessageService,
+  ) {}
 
   ngOnInit(): void {
     this.getAcronym();
+    this.messageService.getMessage().subscribe((message: any) => {
+      if (message.target === 'AcronymComponent') {
+        if (message.action === 'update') {
+          this.value =  (message.payload.last_name.length) ? `${message.payload.first_name} ${message.payload.last_name}` : message.payload.first_name;
+          this.getAcronym();
+        }
+      }
+    });
   }
 
   private getAcronym = (): void => {

@@ -29,6 +29,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { MessageService } from './services/message.service';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoggedInGuard } from './services/loggedin.guard';
+import { ProfileComponent } from './views/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { LoggedInGuard } from './services/loggedin.guard';
     VideoItemComponent,
     ToastComponent,
     LoadingComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

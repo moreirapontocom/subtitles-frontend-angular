@@ -1,5 +1,6 @@
 import { LoggedInGuard } from './services/loggedin.guard';
 import { LoginComponent } from './views/login/login.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { SubmitVideoComponent } from './views/submit-video/submit-video.component';
 import { VideoComponent } from './views/video/video.component';
 import { VideosComponent } from './views/videos/videos.component';
@@ -16,6 +17,7 @@ export const ROUTES = [
       { path: 'videos/caption-request', component: YoutubeCaptionFetchComponent },
       { path: 'videos/:id', component: VideoComponent },
       { path: 'submit-video', component: SubmitVideoComponent },
+      { path: 'profile', component: ProfileComponent },
     ]
   },
 ];
