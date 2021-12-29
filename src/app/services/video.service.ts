@@ -33,4 +33,8 @@ export class VideoService {
   captureVideo = (id: number, consultant_id: string): Observable<any> => {
     return this.http.patch<any>(`${environment.api}/items/videos/${id}`, { consultant_id, status: '2in_progress' });
   }
+
+  releaseCapture = (id: number): Observable<any> => {
+    return this.http.patch<any>(`${environment.api}/items/videos/${id}`, { consultant_id: null, status: '0created' });
+  }
 }

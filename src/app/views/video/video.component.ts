@@ -122,9 +122,21 @@ export class VideoComponent implements OnInit {
     */
   }
 
+  // Start capture
   startCaptions = () => {
     this.videoService.captureVideo(this.video.id, this.user.id).subscribe((response: any) => {
       this.video.consultant_id = this.user.id;
+      this.video.status = '2in_progress';
+      this.messageService.toast('Captura iniciada');
+    });
+  }
+
+  // Release capture
+  releaseVideo = () => {
+    this.videoService.releaseCapture(this.video.id).subscribe((response: any) => {
+      this.video.consultant_id = null;
+      this.video.status = '0created';
+      this.messageService.toast('Vídeo liberado');
     });
   }
 

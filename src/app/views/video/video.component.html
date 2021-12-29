@@ -21,7 +21,7 @@
           <div *ngIf="video.consultant_id !== null" class="col text-end">
             <app-acronym [value]="user | fullName" color="#0099CC" fgColor="#FFFFFF"></app-acronym>
             <small class="text-muted">
-              Consultor
+              Consultor | <a (click)="releaseVideo()" href="javascript:void(null)">Liberar</a>
             </small>
           </div>
         </div>
@@ -126,11 +126,6 @@
       </div>
 
       <div *ngIf="!canConsultantUpdateVideo()">
-        <div class="mb-3">
-          <div class="badge" [ngClass]="video.status | jobStatus: 'style'">
-            {{ video.status | jobStatus: "label" }}
-          </div>
-        </div>
         <div [innerHtml]="video.subtitles || 'Nenhuma legenda adicionada ainda'" class="keep-line-breaks"></div>
       </div>
     </div>
