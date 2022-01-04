@@ -35,14 +35,23 @@
 
   <div class="row d-none d-md-flex">
     <div class="col-12 col-md-6">
-      <div class="video-placeholder">
+      <div #videoPlaceholder class="video-placeholder">
+        <!--
+          More info: https://dev.to/phenomnominal/the-new-angular-youtube-player-component-2cn6
+          (ready): PlayerEvent — fires whenever a player has finished loading and is ready to begin receiving API calls.
+          (stateChange): OnStateChangeEvent — fires whenever the player’s state changes
+          (error): OnErrorEvent — fires if an error occurs in the player
+          (apiChange): PlayerEvent — fires to indicate that the player has loaded (or unloaded) a module with exposed API methods
+          (playbackQualityChange): OnPlaybackQualityChangeEvent — fires whenever the video playback quality changes
+          (playbackRateChange): OnPlaybackRateChangeEvent — fires whenever the video playback rate changes
+        -->
         <youtube-player
           #player
           [videoId]="video.video_id"
           [playerVars]="{ controls: 1 }"
           suggestedQuality="highres"
           [height]="365"
-          [width]="648"
+          [width]="videoPlaceholder.offsetWidth"
         >
         </youtube-player>
       </div>

@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 import { environment } from "src/environments/environment";
 import { AuthService } from "../services/auth.service";
 
@@ -10,7 +11,12 @@ export class HelpersService {
 
     constructor(
         private authService: AuthService,
+        private domSanitizer: DomSanitizer,
     ) { }
+
+    sanitizeUrl(url: string) {
+        return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+    }
 
     emojiRemover = (text: any) => {
         return text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
