@@ -68,7 +68,7 @@
             [ngModel]="video.subtitles"
             (keyup)="isTyping()"
             [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
-            [style]="{ height: player.height }"
+            [style]="{ height: player.height + 'px' }"
             name="subtitles"
             cols=""
             rows="14"
@@ -76,6 +76,20 @@
             required
             placeholder="Escreva a legenda aqui"
           ></textarea>
+
+          <div class="mt-3">
+            <label class="form-label">Anotações Internas <span class="text-muted">(o cliente não tem acesso)</span></label>
+            <textarea
+              [ngModel]="video.notes_internal"
+              name="notes_internal"
+              cols=""
+              rows="5"
+              class="form-control"
+              required
+              placeholder="Anotações internas (o cliente não tem acesso)."
+            ></textarea>
+          </div>
+
           <div class="mt-2">
             <div class="row">
               <div class="col-4 offset-md-5">
@@ -138,7 +152,7 @@
       <div *ngIf="!canConsultantUpdateVideo()">
           <textarea
             [ngModel]="video.subtitles"
-            [style]="{ height: player.height }"
+            [style]="{ height: player.height + 'px' }"
             disabled
             readonly
             cols=""
@@ -146,6 +160,20 @@
             class="form-control"
             placeholder="Escreva a legenda aqui"
           ></textarea>
+
+        <div class="mt-3">
+          <label class="form-label">Anotações Internas <span class="text-muted">(o cliente não tem acesso)</span></label>
+          <textarea
+            [ngModel]="video.notes_internal"
+            disabled
+            readonly
+            cols=""
+            rows="5"
+            class="form-control"
+            required
+            placeholder="Anotações internas (o cliente não tem acesso)."
+          ></textarea>
+        </div>
       </div>
     </div>
   </div>
