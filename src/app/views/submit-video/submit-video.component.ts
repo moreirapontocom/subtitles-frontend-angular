@@ -74,7 +74,7 @@ export class SubmitVideoComponent implements OnInit {
     this.videoService.createVideo(data).subscribe((response: any) => {
       this.loading = false;
       this.messageService.toast('Vídeo enviado com sucesso!');
-      this.router.navigate(['/videos', response.data.id]);
+      this.router.navigate(['/panel/videos', response.data.id]);
     });
   };
 }
