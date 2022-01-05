@@ -16,6 +16,11 @@ textarea {
   resize: none;
 }
 
+.readonly-subtitles {
+  height: 365px;
+  overflow: scroll;
+}
+
 .keep-line-breaks {
   white-space: pre-wrap;
 }

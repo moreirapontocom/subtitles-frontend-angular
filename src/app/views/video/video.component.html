@@ -8,7 +8,7 @@
   </div>
   <h1>{{ video.title }}</h1>
   <p class="page-description">
-    Detalhes do vídeo.
+    <span *ngIf="video.using_youtube_captions" class="text-success"><i class="fas fa-check-circle me-2"></i> Usando legendas geradas automaticamente pelo YouTube</span>
   </p>
 
   <div *ngIf="helpers.isConsultant()" class="row mb-5">
@@ -68,6 +68,7 @@
             [ngModel]="video.subtitles"
             (keyup)="isTyping()"
             [disabled]="(video.consultant_id !== null && user.id !== video.consultant_id && video.status === '2in_progress')"
+            [style]="{ height: player.height }"
             name="subtitles"
             cols=""
             rows="14"
@@ -135,7 +136,16 @@
       </div>
 
       <div *ngIf="!canConsultantUpdateVideo()">
-        <div [innerHtml]="video.subtitles || 'Nenhuma legenda adicionada ainda'" class="keep-line-breaks"></div>
+          <textarea
+            [ngModel]="video.subtitles"
+            [style]="{ height: player.height }"
+            disabled
+            readonly
+            cols=""
+            rows="14"
+            class="form-control"
+            placeholder="Escreva a legenda aqui"
+          ></textarea>
       </div>
     </div>
   </div>

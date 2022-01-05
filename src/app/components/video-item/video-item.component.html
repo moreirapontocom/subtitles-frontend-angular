@@ -2,8 +2,14 @@
     <a [routerLink]="hasLink ? ['/panel/videos', video.id] : null">
         <div class="cover" [style]="{ 'background-image': 'url(' + video.cover + ')' }"></div>
 
-        <div *ngIf="hasStatus" class="badge" [ngClass]="video.status | jobStatus: 'style'">
-            {{ video.status | jobStatus: "label" }}
+        <div class="d-flex">
+            <div *ngIf="hasStatus" class="badge" [ngClass]="video.status | jobStatus: 'style'">
+                {{ video.status | jobStatus: "label" }}
+            </div>
+
+            <div *ngIf="hasStatus" [title]="'Legenda automática do YouTube: ' + (video.using_youtube_captions ? 'Sim' : 'Não')" class="ms-auto">
+                <i class="fas fa-check-circle" [ngClass]="video.using_youtube_captions ? 'text-success' : 'text-muted opaque'"></i>
+            </div>
         </div>
 
         <h2>{{ video.title | truncate: 60 }}</h2>

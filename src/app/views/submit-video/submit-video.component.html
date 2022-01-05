@@ -24,7 +24,7 @@
               <div class="input-group">
                 <input
                   (blur)="getVideoPreview(importGroup.value.url)"
-                  ngModel
+                  [ngModel]="newVideo.url"
                   name="url"
                   required
                   type="url"
@@ -62,7 +62,7 @@
               <div class="row align-items-center">
                 <div class="col-12 col-md-5">
                   <select
-                    ngModel
+                    [(ngModel)]="newVideo.lang_original"
                     name="lang_original"
                     required
                     class="form-select"
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-12 col-md-5">
                   <select
-                    ngModel
+                    [(ngModel)]="newVideo.lang_target"
                     name="lang_target"
                     required
                     class="form-select"
@@ -104,7 +104,6 @@
             [hide]="true"
           ></app-acronym>
           Obter as legendas geradas automaticamente pelo Youtube
-          <span class="text-muted">(disponível em breve)</span>
         </div>
 
         <div class="card ms-3 mb-5">
@@ -117,13 +116,31 @@
               </div>
               <div class="col-12 col-md-4">
                 <button
-                  disabled
+                  *ngIf="isYoutubeConnected"
+                  [disabled]="isYoutubeConnected"
+                  type="button"
+                  class="btn btn-success float-end"
+                >
+                  <i class="fab fa-youtube mr-2"></i> Conectado
+                </button>
+                <button
+                  *ngIf="!isYoutubeConnected"
+                  (click)="youtubeOAuthSignIn()"
+                  [disabled]="isYoutubeConnected || loadingYoutubeConnect"
                   type="button"
                   class="btn btn-danger float-end"
                 >
-                  <i class="fab fa-youtube mr-2"></i> Conectar ao Youtube
+                  <app-loading [loading]="loadingYoutubeConnect" context="button">
+                    <i class="fab fa-youtube mr-2"></i>
+                  </app-loading> Conectar ao Youtube
                 </button>
               </div>
+            </div>
+
+            <div *ngIf="isYoutubeConnected" class="mt-3">
+              <strong>
+                {{ youtubeCaptionsFound ? 'Legenda automática encontrada com sucesso!' : 'Nenhuma legenda automática encontrada para este vídeo.' }}
+              </strong>
             </div>
           </div>
         </div>
