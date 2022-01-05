@@ -158,7 +158,7 @@ export class VideoComponent implements OnInit {
   deleteVideo = () => {
     this.videoService.deleteVideo(this.video.id).subscribe((response: any) => {
       this.messageService.toast('Vídeo removido');
-      this.router.navigate(['/videos']);
+      this.router.navigate(['/panel/videos']);
     });
   };
 
