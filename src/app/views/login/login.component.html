@@ -1,51 +1,63 @@
-<div class="container">
-  <div class="row align-items-center">
-    <div class="col-12 col-md-4 offset-md-4">
+<div class="container-fluid">
+  <div class="row align-items-center mh-100vh">
+    <div class="col-12 col-md-3 mh-100vh form-column bg-white">
       <h1>Entrar</h1>
-      <p class="page-description">Informe seus dados de acesso para entrar na plataforma.</p>
-      <div class="card card-body">
-        <form #formLogin="ngForm" (submit)="login(formLogin.value)" novalidate>
-          <div class="mb-2">
-            <label>E-mail</label>
-            <input
-              type="email"
-              email
-              ngModel
-              name="email"
-              class="form-control"
-              title="Email"
-              required
-            />
-          </div>
-          <div class="mb-2">
-            <label>Senha</label>
-            <input
-              type="password"
-              ngModel
-              name="password"
-              class="form-control"
-              title="Password"
-              required
-            />
-          </div>
-          <div class="d-grid mt-4">
-            <button
-              [disabled]="!formLogin.valid"
-              type="submit"
-              class="btn btn-primary"
-            >
-              <app-loading [loading]="loading" context="button"></app-loading>
-              Entrar
-            </button>
-          </div>
-        </form>
-      </div>
-
+      <p class="page-description">
+        Informe seus dados de acesso para entrar na plataforma.
+      </p>
+      <form #formLogin="ngForm" (submit)="login(formLogin.value)" novalidate>
+        <div class="mb-2">
+          <input
+            type="email"
+            email
+            ngModel
+            name="email"
+            class="form-control"
+            title="Email"
+            placeholder="Informe seu e-mail"
+            required
+          />
+        </div>
+        <div class="mb-2">
+          <input
+            type="password"
+            ngModel
+            name="password"
+            class="form-control"
+            title="Password"
+            placeholder="Senha"
+            required
+          />
+        </div>
+        <div class="d-grid mt-4">
+          <button
+            [disabled]="!formLogin.valid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            <app-loading [loading]="loading" context="button"></app-loading>
+            Entrar
+          </button>
+        </div>
+      </form>
       <!-- Drive / Customers and Projects / Projetos pessoais -->
-      <div class="mt-2">
-        <a href="https://forms.gle/NjAqQ9DDbepZnmPw7" target="_blank" rel="noopener noreferrer" class="btn btn-link">Criar uma Conta grátis</a>
+      <div class="mt-5 text-center">
+        <a
+          href="https://forms.gle/NjAqQ9DDbepZnmPw7"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-link"
+          >Criar uma Conta grátis</a
+        >
       </div>
-
+    </div>
+    <div class="col-12 col-md-9 image-column">
+      <div class="mh-100vh">
+        <span>
+          Sejam vídeos do YouTube, Vimeo, curta-metragens ou podcast,<br>
+          a legenda sempre fica por nossa conta.
+        </span>
+      </div>
     </div>
   </div>
 </div>

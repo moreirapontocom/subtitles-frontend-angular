@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+// https://flatuicolors.com/palette/us
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+$color-primary: #0984e3;
 
 body {
     background-color: #f3f5f7;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    color: #444;
 }
 
 h1 {
@@ -14,6 +18,10 @@ h1 {
 
 .card {
     border: none;
+}
+
+.mh-100vh {
+    min-height: 100vh;
 }
 
 .page-description {
@@ -26,7 +34,14 @@ h1 {
     margin-bottom: 20px;
 }
 
+.opaque {
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+}
+
 .form-control {
+    border-radius: 0;
+
     &:focus,
     &:active {
         box-shadow: none;
@@ -34,13 +49,40 @@ h1 {
     }
 }
 
-.opaque {
-    opacity: 0.5;
-    -moz-opacity: 0.5;
-}
-
 .btn {
+    @mixin btn {
+        text-transform: uppercase;
+        border-radius: 0;
+
+        &:active,
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    &.btn-secondary {
+        @include btn();
+    }
+
+    &.btn-primary {
+        @include btn();
+        background-color: $color-primary;
+        border-color: $color-primary;
+
+        &:hover {
+            background-color: darken($color-primary, 10%);
+            border-color: darken($color-primary, 10%);
+        }
+    }
+
     &.btn-link {
+        color: $color-primary;
+
+        &:hover {
+            color: darken($color-primary, 10%);
+        }
+
         &.btn-link-inline {
             padding: 0;
             display: inline-block;

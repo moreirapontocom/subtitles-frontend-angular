@@ -1,0 +1,39 @@
+.form-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    a.btn.btn-link {
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: .9rem;
+    }
+}
+
+.image-column {
+    background-color: #fdcb6e;
+    text-align: center;
+    background-image: url("./../../../assets/images/login-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        padding-bottom: 50px;
+
+        span {
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 22px;
+            bottom: 7%;
+            display: inline;
+        }
+    }
+}
