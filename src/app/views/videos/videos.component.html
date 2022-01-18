@@ -6,7 +6,7 @@
 
   <div class="row videos-filter mb-4">
     <div class="col-12 col-md-3">
-      <select [disabled]="loading || videos.length === 0" (change)="filterJobsByStatus()" [(ngModel)]="filterStatus" title="Filter job status" class="form-select">
+      <select [disabled]="loading" (change)="filterJobsByStatus()" [(ngModel)]="filterStatus" title="Filter job status" class="form-select">
         <option value="all">Todos os status</option>
         <option *ngFor="let status of helpers.availableJobStatus" [value]="status.id">
           {{ status.label }}
@@ -17,7 +17,8 @@
 
   <app-loading [loading]="loading"></app-loading>
 
-  <div *ngIf="!loading && videos.length === 0" class="row pt-4">
+  <!-- No video added -->
+  <div *ngIf="!loading && videos.length === 0 && filterStatus === 'all'" class="row pt-4">
     <div class="col-12 text-center">
       <img src="assets/images/empty.svg" alt="Nenhum vídeo adicionado" width="400">
       <p class="mt-4">
@@ -26,6 +27,15 @@
       <div class="mt-3">
         <a [routerLink]="['/panel/submit-video']" class="btn btn-primary">Adicione seu primeiro vídeo</a>
       </div>
+    </div>
+  </div>
+
+  <!-- No videos on selected status -->
+  <div *ngIf="!loading && videos.length === 0 && filterStatus !== 'all'" class="row pt-4">
+    <div class="col-12 text-center">
+      <p class="mt-4">
+        <strong>Nenhum vídeo no status "{{ filterStatus | jobStatus: "label" }}"</strong>
+      </p>
     </div>
   </div>
 
