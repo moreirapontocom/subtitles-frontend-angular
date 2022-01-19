@@ -161,7 +161,7 @@
             placeholder="Escreva a legenda aqui"
           ></textarea>
 
-        <div class="mt-3">
+        <div *ngIf="helpers.isConsultant()" class="mt-3">
           <label class="form-label">Anotações Internas <span class="text-muted">(o cliente não tem acesso)</span></label>
           <textarea
             [ngModel]="video.notes_internal"
