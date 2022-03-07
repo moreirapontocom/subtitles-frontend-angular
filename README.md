@@ -6,22 +6,37 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Project description
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Platform intended to help content producers (on Youtube or Vimeo) to get perfect subtitles and closed captions (CC) in their videos. Both, Youtube and Vimeo, has its own auto-generated subtitles but they are far way to be good enough.
 
-## Build
+This platform have two different access profiles: producer and consultant.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Producers can:**
 
-## Running unit tests
+* Add Youtube videos to be subtitled
+* Integrate with the Youtube API to get auto-generated subtitles
+* Choose which type of subtitles is needed for each video (language, closed-caption, etc).
+* Receive email notifications when video status has changed
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Consultants can:**
 
-## Running end-to-end tests
+* See unassigned videos to work on
+* Write subtitles using the auto-play/pause tool
+* Change video status
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+This is a platform built for study purposes using Angular 12. The API is a headless CMS (Directus CMS) using NodeJS and MySQL.
 
-## Further help
+# Screenshots
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Login:
+![Login](src/assets/readme-images/login.jpg "Login")
+
+Consultants view with unassigned videos from all producers and only those videos his already started.
+![Consultants view](src/assets/readme-images/videos-consultant-view.jpg "Consultants view")
+
+Consultants subtitle tool with auto-play/pause feature.
+![Subtitle tool](src/assets/readme-images/subtitles-tool.jpg "Subtitle tool")
+
+Producers submit video tool with auto-preview and integration with the Youtube API.
+![Submit tool](src/assets/readme-images/submit-video.jpg "Submit")
